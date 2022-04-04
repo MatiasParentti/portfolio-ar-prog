@@ -1,0 +1,67 @@
+<div class="experience">
+    <div class="about">
+      <h2>Experience</h2>
+      <div class="exp">
+        <div class="list-group">
+          <div *ngFor="let experience of experiences" class="list-group-item list-group-item-action target">
+            <div class="d-flex w-100 justify-content-between header">
+              <div class="head">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                  <path class="circle" fill="currentColor" fill-rule="evenodd"
+                    d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1ZM8.707 14.207a1 1 0 0 1-1.414-1.414l4-4a1 1 0 0 1 1.414 0l4 4a1 1 0 0 1-1.414 1.414L12 10.914l-3.293 3.293Z"
+                    clip-rule="evenodd" />
+                </svg>
+                <h5 class="mb-1">{{ experience.cargo }}</h5>
+              </div>
+              <small>{{ experience.fecha }}</small>
+            </div>
+            <div class="exp3">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                <path fill="transparent"
+                  d="M7.75 1a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-1.5 0V1.75A.75.75 0 0 1 7.75 1Z" />
+              </svg>
+              <p class="mb-1">{{ experience.tareas }}</p>
+            </div>
+            <div class="exp3">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16">
+                <path fill="transparent"
+                  d="M7.75 1a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-1.5 0V1.75A.75.75 0 0 1 7.75 1Z" />
+              </svg>
+              <div class="expEdit">
+                <small>{{ experience.empresa }}</small>
+                <div *ngIf=(session) type="button" data-bs-toggle="modal"
+                  data-bs-target="#experienceModal"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                    role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M19 20H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2ZM5 18h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71L16.66 2.6A2 2 0 0 0 14 2.53l-9 9a2 2 0 0 0-.57 1.21L4 16.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 18ZM15.27 4L18 6.73l-2 1.95L13.32 6Z" />
+                  </svg></div>
+              </div>
+              <!-- Modal -->
+              <div class="modal fade" id="experienceModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">edit</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <input type="text" #aboutText>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save
+                        changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

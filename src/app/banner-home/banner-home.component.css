@@ -1,0 +1,83 @@
+.home {
+    margin-top: 4rem;
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 8rem;
+    margin-right: 8rem;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    z-index: 6;
+    background: rgba(23, 27, 35, 0.6);
+  }
+  
+  .button {
+    display: inline-block;
+    background-color: hsl(195,58%,31%);
+    color: #fff !important;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    border-radius: 0.2rem;
+    text-decoration: none;
+  }
+  .homeTitleColor {
+    color: hsl(195,58%,31%);
+  }
+  .homeTitle {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+  }
+
+  .homeImg {
+    position: relative;
+    width: 150px;
+    float: right;
+    animation: float 5s linear infinite;
+  }
+  @keyframes float{
+    0%, 100%{
+        transform: translateX(2rem);
+    }
+    50%{
+        transform: translateX(-1rem);
+    }
+  }
+
+  .svgHome{
+    position: absolute;
+    margin-left: 8rem;
+    margin-right: 8rem;
+  }
+  .svgHome svg{
+  width: 300px;
+  height: 200px;
+  
+  }
+
+  /* Responsive Styles */
+@media screen and (max-width: 990px) {
+    .home {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      
+    }
+   
+  }
+  @media screen and (max-width: 767px) {
+    .home {
+      margin-top: 4rem;
+    }
+   
+   
+  }
+  
+  @media screen and (max-width: 575px) {
+    .home {
+      margin-left: 0rem;
+      margin-right: 0rem;
+      margin-top: 6.5rem;
+    }
+   
+    
+  }
+  

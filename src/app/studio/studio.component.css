@@ -1,0 +1,51 @@
+.about {
+    margin-top: 10px;
+    background-color:hsl(195,6%,11%);
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    z-index: 6;
+  }
+
+  .target{
+    background-color:transparent;
+    color: rgb(232, 230, 227);
+  }
+  .studioEdit{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+svg{
+    height: 20px;
+   width: 20px;
+  }
+
+   /* Responsive Styles */
+@media screen and (max-width: 990px) {
+    
+    .about {
+      margin-right: 2rem;
+      margin-left: 2rem;
+    }
+  }
+  @media screen and (max-width: 767px) {
+   
+    .about {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+   
+  }
+  
+  @media screen and (max-width: 575px) {
+   
+    .about {
+      margin-right: 0rem;
+      margin-left: 0rem;
+    }
+    
+    
+  }

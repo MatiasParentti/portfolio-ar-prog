@@ -1,0 +1,61 @@
+.btnGit{
+    color: #fff ;
+  padding: 0.5rem;
+  }
+  .btnGit:hover {
+    color: gainsboro;
+  }
+  
+  .footer {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background: rgba(23, 27, 35, 0.6);
+    padding: 10px;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .footerLinks{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .footerLinks svg{
+    margin: 1.5rem;
+    height: 30px;
+    width: 30px;
+  }
+  .svgFooter svg{
+    height: 100%;
+    width:  100%;
+  }
+  .svgFooter{
+    bottom: 0;
+  }
+  .skillColor:hover  {
+    fill: hsl(195,58%,31%);
+  }
+  .skillColor{
+    fill: rgb(232, 230, 227);
+  }
+  svg{
+    height: 30px;
+   width: 30px;
+  }
+  /* Responsive Styles */
+@media screen and (max-width: 990px) {
+    
+  }
+  @media screen and (max-width: 767px) {
+   
+   
+  }
+  
+  @media screen and (max-width: 575px) {
+    
+    .foo{
+      margin-top: 5rem;
+    }
+    
+  }
+  

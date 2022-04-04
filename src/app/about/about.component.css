@@ -1,0 +1,92 @@
+
+.about {
+    margin-top: 10px;
+    background-color:hsl(195,6%,11%);
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    z-index: 6;
+  }
+ 
+  .aboutText {
+    color: #fff;
+    font-size: 1rem;
+    padding-bottom: 1rem;
+  }
+  .aboutSubtitle {
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  .headerEdit{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .editCont svg{
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin-top: 15px;
+  }
+
+  .fotoPerfil{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 5px solid hsl(195,58%,31%);
+    margin-top: 1rem;
+  }
+  .fotoPerfilCont{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  
+  .fotoPerfil{
+    
+    animation:aboutImage 4s linear infinite;
+  }
+  
+  @keyframes aboutImage {
+    0%, 100%{
+        transform: scale(.9);
+        border-radius: 4% 95% 6% 95%/95% 4% 92% 5%;
+    }
+    50%{
+        transform: scale(.8);
+        border-radius: 95% 4% 97% 5%/4% 94% 3% 95%;
+    }
+  }
+  svg{
+    height: 30px;
+   width: 30px;
+  }
+
+  
+@media screen and (max-width: 990px) {
+ 
+  .about {
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
+}
+@media screen and (max-width: 767px) {
+  
+  .about {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+ 
+}
+
+@media screen and (max-width: 575px) {
+ 
+  .about {
+    margin-right: 0rem;
+    margin-left: 0rem;
+  }
+
+  
+}

@@ -1,0 +1,90 @@
+.card{
+    margin-top: 5px;
+    padding: 5px;
+    border-radius:0.5rem;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    background: rgba(23, 27, 35, 0.6);
+    border: 1px solid rgba(23, 27, 35, 0.6); 
+  }
+  .about {
+    margin-top: 10px;
+    background-color:hsl(195,6%,11%);
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    z-index: 6;
+  }
+
+  .skillsName{
+    color: hsl(195,58%,31%);
+    align-items: center;
+  }
+  .skillsBar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: hsl(195,58%,31%);
+    height: 0.25rem;
+    border-radius: 0.5rem;
+    width: 100%;
+  }
+  .skills2{
+    margin-top: 5px;
+  }
+
+  .card:hover {
+ 
+    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+    
+  }
+  .card-body{
+    justify-content: center;
+    text-align: center;
+    padding: 0.25rem;
+  }
+  
+  .card:hover .skillColor {
+    fill: hsl(195,58%,31%);
+  }
+  
+  
+  .skillColor{
+    fill: rgb(232, 230, 227);
+  }
+  svg{
+    height: 30px;
+   width: 30px;
+  }
+  
+  .skillColor:hover  {
+    fill: hsl(195,58%,31%);
+  }
+
+       /* Responsive Styles */
+@media screen and (max-width: 990px) {
+    
+  .about {
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
+}
+@media screen and (max-width: 767px) {
+ 
+  .about {
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+ 
+}
+
+@media screen and (max-width: 575px) {
+ 
+  .about {
+    margin-right: 0rem;
+    margin-left: 0rem;
+  }
+  
+  
+}

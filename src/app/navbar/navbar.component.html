@@ -1,0 +1,27 @@
+<nav class="myNav">
+    <div class="navContainer">
+      <div class="leftNavWrapper">
+        <div class="logoContainer">
+          <span class="logoBox">
+            <img width="25" alt="Logo" src="../assets/perfilM.png" />
+
+            <a href="#">
+              <h1 class="name">Matias Parentti</h1>
+            </a>
+          </span>
+
+        </div>
+      </div>
+      <div class="{{linkGroup}}">
+        <a (click)="cerrar()" href="#works" class="childLink">Works</a>
+        <a (click)="cerrar()" href="/" class="childLink">Github</a>
+        <a (click)="cerrar()" href="#contact" class="childLink">Contact</a>
+      </div>
+      <div (click)="cerrar()" id="menu-btn" class="fas fa-bars"><svg xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 24 24">
+          <path fill="currentColor" d="M21 18H9v-2h12v2Zm0-5H3v-2h18v2Zm0-5H9V6h12v2Z" />
+        </svg>
+      </div>
+    </div>
+  </nav>

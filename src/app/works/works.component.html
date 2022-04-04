@@ -1,0 +1,40 @@
+<div class="works" id="works">
+    <div class="about">
+      <h2>Works</h2>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div *ngFor="let work of works" class="col">
+          <div class="card">
+            <div class="cardImg">
+              <img src="{{ work.image }}" class="card-img-top" alt="..." />
+              <div *ngIf=(session) class="cardImgEdit"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                  role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                  <path fill="currentColor"
+                    d="M19 20H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2ZM5 18h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71L16.66 2.6A2 2 0 0 0 14 2.53l-9 9a2 2 0 0 0-.57 1.21L4 16.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 18ZM15.27 4L18 6.73l-2 1.95L13.32 6Z" />
+                </svg></div>
+              <div class="content">
+                <h3>web design</h3>
+                <p>1st may, 2021</p>
+              </div>
+            </div>
+
+
+            <div class="card-body">
+              <h5 class="card-title">{{ work.name }}</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Node/CSS/React</li>
+              </ul>
+              <p class="card-text">{{ work.info }}</p>
+              <div class="buttonsWork">
+                <button class="btnWork">
+                  <a href="{{ work.liveCode }}" target="_blank">Live server</a>
+                  <span class="btnSpan"></span>
+                </button>
+                <a href="{{ work.source }}" class="btnGit">>Github</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>

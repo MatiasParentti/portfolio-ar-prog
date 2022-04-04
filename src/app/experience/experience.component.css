@@ -1,0 +1,80 @@
+.about {
+    margin-top: 10px;
+    background-color:hsl(195,6%,11%);
+    padding: 20px;
+    border-radius: 10px;
+    margin-left: 10rem;
+    margin-right: 10rem;
+    z-index: 6;
+  }
+
+  .exp :hover{
+    color:hsl(195,58%,31%);
+  }
+  .header svg{
+    width: 20px;
+    height:20px;
+    margin-top: 10px;
+    margin-right: 10px;
+  }
+  
+  .head{
+    display: flex;
+  }
+  .head svg{
+    margin-top: 5px;
+  }
+  .exp3{
+    display: flex;
+  }
+
+  .exp3 svg{
+   margin-right: 10px;
+  }
+
+
+ svg{
+    width: 20px;
+    height: 20px;
+   
+  }
+
+  .target{
+    background-color:transparent;
+    color: rgb(232, 230, 227);
+  }
+  .expEdit{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+
+
+  /* Responsive Styles */
+@media screen and (max-width: 990px) {
+    
+    .about {
+      margin-right: 2rem;
+      margin-left: 2rem;
+    }
+  }
+  @media screen and (max-width: 767px) {
+   
+    .about {
+      margin-left: 2rem;
+      margin-right: 2rem;
+    }
+   
+  }
+  
+  @media screen and (max-width: 575px) {
+   
+    .about {
+      margin-right: 0rem;
+      margin-left: 0rem;
+    }
+    
+    
+  }
+  
