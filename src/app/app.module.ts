@@ -12,6 +12,7 @@ import { SkillsComponent } from './skills/skills.component';
 import { ContactComponent } from './contact/contact.component';
 import { BannerHomeComponent } from './banner-home/banner-home.component';
 import { FooterComponent } from './footer/footer.component';
+import { FormsModule } from '@angular/forms';
 //import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
@@ -31,6 +32,7 @@ import { FooterComponent } from './footer/footer.component';
     BrowserModule,
     AppRoutingModule,
     //FontAwesomeModule
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

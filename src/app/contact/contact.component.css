@@ -10,7 +10,8 @@
 
   .form-control{
     background-color:hsl(200,5%,10%) ;
-    border-color: #736b5e
+    border-color: #736b5e;
+    color: #fff;
   }
 
   .button {

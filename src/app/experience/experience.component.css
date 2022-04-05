@@ -21,9 +21,7 @@
   .head{
     display: flex;
   }
-  .head svg{
-    margin-top: 5px;
-  }
+  
   .exp3{
     display: flex;
   }
@@ -49,7 +47,33 @@
     width: 100%;
   }
   
+  .form-control{
+    background-color:hsl(200,5%,10%) ;
+    border-color: #736b5e;
+    color: #fff;
+  }
 
+  .card{
+    background-color: transparent;
+  }
+  .headerEdit{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  .editCont svg{
+    margin-top: 20px;
+  }
+
+  .button {
+    display: inline-block;
+    background-color: hsl(195,58%,31%);
+    color: #fff !important;
+    padding: 0.5rem 1.5rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    text-decoration: none;
+  }
 
   /* Responsive Styles */
 @media screen and (max-width: 990px) {

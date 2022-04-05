@@ -1,7 +1,7 @@
 <div class="about">
-    <div class="headerEdit">
+   <div class="headerEdit">
       <h2>About</h2>
-      <div *ngIf=(session) type="button" class="editCont" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <div *ngIf=(session) type="button" class="editCont" data-bs-toggle="modal" data-bs-target="#about">
         <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
           preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
           <path fill="currentColor"
@@ -10,10 +10,9 @@
       </div>
     </div>
 
+   <!--   Modal -->
 
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="about" tabindex="-1" aria-labelledby="about" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
@@ -41,4 +40,5 @@
         </p>
       </div>
     </div>
+
   </div>
