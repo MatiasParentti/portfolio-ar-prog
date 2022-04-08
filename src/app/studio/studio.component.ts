@@ -1,54 +1,62 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ServDeleteService } from '../serv-delete.service';
+import { studys } from './studys.components';
+import { ServDataService } from '../serv-data.service';
 
 @Component({
   selector: 'app-studio',
   templateUrl: './studio.component.html',
   styleUrls: ['./studio.component.css']
 })
+
 export class StudioComponent implements OnInit {
 
-  study = [
+  @Input() session!: boolean;
 
-    {
-      id: '1',
-      instituto: 'Ministerio de desarrollo productivo',
-      fecha: '2021 - Actualidad',
-      programa: 'Argentina Programa',
-      estado: 'En Curso'
-    },
-    {
-      id: '2',
-      instituto: 'Full Stack Open',
-      fecha: '2022 - Actualidad',
-      programa: 'Full Stack Open 2021',
-      estado: 'En Curso'
-    },
-    {
-      id: '3',
-      instituto: 'UTN FRC',
-      fecha: '2020 - 2021',
-      programa: 'Diplomatura desarrollo web',
-      estado: 'Finalizado'
-    },
-    {
-      id: '4',
-      instituto: 'Escuela Secundaria Marina Vilte Nº2',
-      fecha: '2008 - 2013',
-      programa: 'Titulo Educacion Secundaria',
-      estado: 'Finalizado'
-    },
+  studyGet: any = this.myData.studyGet
 
-
-  ];
-
-  session = true;
   newStudy = false;
+  editExp = false;
 
-  id = ' '
-  instituto = ' '
-  fecha = ' '
-  programa = ' '
-  estado = ' '
+  index: any;
+
+  ids: number = 0;
+
+  id: number = 0
+  instituto: string = ' '
+  fecha: string = ' '
+  programa: string = ' '
+  estado: string = ' '
+
+  edits(id: number) {
+    this.editExp = true;
+    this.ids = id
+    this.index = this.myData.editStudy(id)
+    this.instituto = this.index.instituto
+    this.fecha = this.index.fecha
+    this.programa = this.index.programa
+    this.estado = this.index.estado
+    this.id = this.index.id
+  }
+
+  cancelar() {
+    this.editExp = false;
+    this.instituto = ''
+    this.fecha = ''
+    this.programa = ''
+    this.estado = ''
+    this.id = 0
+  }
+  confirmar() {
+    const editThis = new studys(this.id, this.instituto, this.fecha, this.programa, this.estado)
+    this.myData.actualizarStudy(this.ids, editThis)
+    this.editExp = false;
+    this.instituto = ''
+    this.fecha = ''
+    this.programa = ''
+    this.estado = ''
+    this.id = 0
+  }
 
   btnNewStudy() {
     if (this.newStudy == false) {
@@ -57,33 +65,35 @@ export class StudioComponent implements OnInit {
       this.newStudy = false
     }
   }
+
   clear() {
-    this.id = '',
+    this.id = 0,
       this.instituto = ' ',
       this.fecha = ' ',
       this.programa = ' ',
       this.estado = ' '
   }
-  delete() {
 
+  delete(id: number, programa: string) {
+    const resp = this.myService.msjAlert('eliminar  ' + programa + '?')
+    if (resp) {
+      this.myData.deleteStudy(id)
+    }
+    return false
   }
 
   add() {
-    const add = {
-      id: this.id,
-      instituto: this.instituto,
-      fecha: this.fecha,
-      programa: this.programa,
-      estado: this.estado
-    }
-    this.study.push(add);
+    const add = new studys(this.studyGet.length + 1, this.instituto, this.fecha, this.programa, this.estado)
+    this.myData.pushNewStudy(add)
     this.clear()
     this.newStudy = false;
     return false;
   }
 
 
-  constructor() { }
+  constructor(private myService: ServDeleteService, private myData: ServDataService) {
+
+  }
 
   ngOnInit(): void {
   }

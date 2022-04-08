@@ -1,44 +1,49 @@
 <div class="about">
-   <div class="headerEdit">
-      <h2>About</h2>
-      <div *ngIf=(session) type="button" class="editCont" data-bs-toggle="modal" data-bs-target="#about">
-        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-          preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-          <path fill="currentColor"
-            d="M19 20H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2ZM5 18h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71L16.66 2.6A2 2 0 0 0 14 2.53l-9 9a2 2 0 0 0-.57 1.21L4 16.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 18ZM15.27 4L18 6.73l-2 1.95L13.32 6Z" />
-        </svg>
-      </div>
+  <div class="headerEdit">
+    <h2>About</h2>
+    <div *ngIf=(session) class="editCont" (click)="btnNewExp()">
+      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+        preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+        <path fill="currentColor"
+          d="M19 20H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2ZM5 18h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71L16.66 2.6A2 2 0 0 0 14 2.53l-9 9a2 2 0 0 0-.57 1.21L4 16.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 18ZM15.27 4L18 6.73l-2 1.95L13.32 6Z" />
+      </svg>
     </div>
+  </div>
 
-   <!--   Modal -->
 
-    <div class="modal fade" id="about" tabindex="-1" aria-labelledby="about" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <input type="text" #aboutText>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" (click)="changeAbout(aboutText.value)">Save changes</button>
+  <div class="row myAbout">
+    <div class="col-12 col-lg-4 fotoPerfilCont mt-1">
+      <img class="fotoPerfil" src="../assets/IMG_0086.JPG" alt="perfil" />
+    </div>
+    <div class="col-12 col-lg-8 mt-1">
+      <h2 class="aboutSubtitle">I'am {{ name }}</h2>
+
+      <p *ngIf="newExp; else test" class="aboutText">
+        {{abouText}}
+      </p>
+      <ng-template #test>
+        <div class="card mt-1" id="newAbouText">
+          
+          <div class="card-body">
+            <Form>
+              <div class="mb-1">
+                <label for=" newAbouText" class="form-label"> newAbouText</label>
+                <input type="text" class="form-control" name=" newAbouText" value=" newAbouText" id=" newAbouText"
+                  aria-describedby="emailHelp" [(ngModel)]=" newAbouText">
+              </div>
+
+              <button class="button mt-1" ng-click="$event.preventDefault()" type="submit" value="add"
+                (click)="add()">add</button>
+            </Form>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12 col-lg-6 fotoPerfilCont mt-1">
-        <img class="fotoPerfil" src="../assets/IMG_0086.JPG" alt="perfil" />
-      </div>
-      <div class="col-12 col-lg-6 mt-1">
-        <h2 class="aboutSubtitle">I'am {{ name }}</h2>
-        <p class="aboutText">
-          {{aboutText.value}}
-        </p>
-      </div>
-    </div>
+      </ng-template>
 
+    </div>
   </div>
+
+
+
+
+
+</div>

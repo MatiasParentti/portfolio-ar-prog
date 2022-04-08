@@ -1,40 +1,111 @@
 <div class="works" id="works">
-    <div class="about">
+  <div class="about">
+
+
+    <div class="headerEdit">
       <h2>Works</h2>
-      <div class="row row-cols-1 row-cols-md-2 g-4">
-        <div *ngFor="let work of works" class="col">
-          <div class="card">
-            <div class="cardImg">
-              <img src="{{ work.image }}" class="card-img-top" alt="..." />
-              <div *ngIf=(session) class="cardImgEdit"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
-                  role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                  <path fill="currentColor"
-                    d="M19 20H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2ZM5 18h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71L16.66 2.6A2 2 0 0 0 14 2.53l-9 9a2 2 0 0 0-.57 1.21L4 16.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 18ZM15.27 4L18 6.73l-2 1.95L13.32 6Z" />
-                </svg></div>
-              <div class="content">
-                <h3>web design</h3>
-                <p>1st may, 2021</p>
-              </div>
+      <div *ngIf=(session) type="button" class="editCont" (click)="btnNewWork()">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+          preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32">
+          <path fill="forestgreen"
+            d="M16 2A14.172 14.172 0 0 0 2 16a14.172 14.172 0 0 0 14 14a14.172 14.172 0 0 0 14-14A14.172 14.172 0 0 0 16 2Zm8 15h-7v7h-2v-7H8v-2h7V8h2v7h7Z" />
+          <path fill="none" d="M24 17h-7v7h-2v-7H8v-2h7V8h2v7h7v2z" />
+        </svg>
+      </div>
+    </div>
+
+
+    <div *ngIf="!newWork; else test" class="row row-cols-1 row-cols-md-2 g-4">
+      <div *ngFor="let work of worksGet ;let indexOfelement=index;" class="col">
+        <div class="card">
+          <div class="cardImg">
+
+            <img src="{{ work.image }}" class="card-img-top" alt="..." />
+
+            
+
+            <div *ngIf=(session) class="cardImgEdit"  (click)="editar()"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                <path fill="currentColor"
+                  d="M19 20H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2ZM5 18h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71L16.66 2.6A2 2 0 0 0 14 2.53l-9 9a2 2 0 0 0-.57 1.21L4 16.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 18ZM15.27 4L18 6.73l-2 1.95L13.32 6Z" />
+              </svg></div>
+
+            <div class="content">
+              <h3>{{ work.name }}</h3>
+              <p>{{ work.stack }}</p>
             </div>
+          </div>
 
 
-            <div class="card-body">
-              <h5 class="card-title">{{ work.name }}</h5>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Node/CSS/React</li>
-              </ul>
-              <p class="card-text">{{ work.info }}</p>
-              <div class="buttonsWork">
-                <button class="btnWork">
-                  <a href="{{ work.liveCode }}" target="_blank">Live server</a>
-                  <span class="btnSpan"></span>
-                </button>
-                <a href="{{ work.source }}" class="btnGit">>Github</a>
-              </div>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <ul class="list-group list-group-flush">
+              
+              <li class="list-group-item"><a href="/works">
+                mas info<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="currentColor" d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512L181.7 851.1A7.98 7.98 0 0 0 188 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5zm304 0L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512L485.7 851.1A7.98 7.98 0 0 0 492 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"/></svg>
+              </a></li>
+            </ul>
+            <p class="card-text"></p>
+            
+            <div class="buttonsWork">
+              <button class="btnWork">
+                <a href="{{ work.liveCode }}" target="_blank">Live server</a>
+                <span class="btnSpan"></span>
+              </button>
+              <a href="{{ work.source }}" class="btnGit">>Github</a>
+             
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <ng-template #test>
+      <div class="card  mt-1">
+        <h5 class="card-header">Agregar Estudio</h5>
+        <div class="card-body newCard">
+          <Form>
+            <div class="mb-1">
+              <label for="name" class="form-label">name</label>
+              <input type="text" class="form-control" name="name" value="name" id="name" aria-describedby="emailHelp"
+                [(ngModel)]="name">
+            </div>
+            <div class="mb-1">
+              <label for="liveCode" class="form-label">liveCode</label>
+              <input type="text" class="form-control" name="liveCode" value="liveCode" id="liveCode"
+                aria-describedby="emailHelp" [(ngModel)]="liveCode">
+            </div>
+            <div class="mb-1">
+              <label for="source" class="form-label">source</label>
+              <input type="text" class="form-control" name="source" value="source" id="source"
+                aria-describedby="emailHelp" [(ngModel)]="source">
+            </div>
+            <div class="mb-1">
+              <label for="image" class="form-label">image</label>
+              <input type="text" class="form-control" name="image" value="image" id="image" aria-describedby="emailHelp"
+                [(ngModel)]="image">
+            </div>
+            <div class="mb-1">
+              <label for="info" class="form-label">info</label>
+              <input type="text" class="form-control" name="info" value="info" id="info" aria-describedby="emailHelp"
+                [(ngModel)]="info">
+            </div>
+            <div class="mb-1">
+              <label for="stack " class="form-label">stack</label>
+              <input type="text" class="form-control" name="stack " value="stack " id="stack "
+                aria-describedby="emailHelp" [(ngModel)]="stack">
+            </div>
+
+            <button class="button mt-1" ng-click="$event.preventDefault()" type="submit" value="add"
+              (click)="add()">add</button>
+          </Form>
+        </div>
+      </div>
+    </ng-template>
+
+
+
+
   </div>
+
+</div>

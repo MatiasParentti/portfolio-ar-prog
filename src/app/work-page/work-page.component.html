@@ -1,0 +1,150 @@
+
+<div class="container">
+  <div class="about">
+
+    <div *ngIf="!editWork; else edit">
+      <div class="card mb-3" *ngFor="let work of worksGet ;let indexOfelement=index;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{work.image}}" class="img-fluid rounded-start" alt="...">
+            <div class="buttonsWork">
+  
+              <button class="btnWork">
+                <a href="{{work.liveCode}}" target="_blank">Live server</a>
+                <span class="btnSpan"></span>
+              </button>
+              <a href="{{work.source}}" class="btnGit">>Github</a>
+  
+            </div>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <div class="headerEdit">
+                <h5 class="card-title">{{work.name}}</h5>
+                <div type="button" class="editCont" (click)="edits(indexOfelement)">
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M19 20H5a1 1 0 0 0 0 2h14a1 1 0 0 0 0-2ZM5 18h.09l4.17-.38a2 2 0 0 0 1.21-.57l9-9a1.92 1.92 0 0 0-.07-2.71L16.66 2.6A2 2 0 0 0 14 2.53l-9 9a2 2 0 0 0-.57 1.21L4 16.91a1 1 0 0 0 .29.8A1 1 0 0 0 5 18ZM15.27 4L18 6.73l-2 1.95L13.32 6Z" />
+                  </svg>
+                </div>
+              </div>
+  
+              <p class="card-text mt-1"><small>{{work.stack}}</small></p>
+              <p class="btnDown">
+                <a class="mt-1" data-bs-toggle="collapse" href='#this' role="button" aria-expanded="false"
+                  aria-controls="collapseExample">
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <path fill="currentColor" fill-rule="evenodd"
+                      d="M12 1C5.925 1 1 5.925 1 12s4.925 11 11 11s11-4.925 11-11S18.075 1 12 1ZM8.707 9.793a1 1 0 0 0-1.414 1.414l4 4a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L12 13.086L8.707 9.793Z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </a> 
+                descripcion
+                
+              </p>
+              <div class="collapse" id="this">
+                <div class="card-body">
+                  {{work.info}}
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #edit>
+    
+      <div class="card mb-3">
+        <Form>
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{image}}" class="img-fluid rounded-start" alt="...">
+              <div class="mb-1 input-group-sm">
+                <label for="image" class="form-label">image</label>
+                <input type="text" class="form-control" name="stack" value="image" id="image" aria-describedby="image"
+                  [(ngModel)]="image">
+              </div>
+              <div class="buttonsWork">
+                <div class="mb-1 input-group-sm">
+                  <label for="source" class="form-label">source</label>
+                  <input type="text" class="form-control" name="source" value="source" id="source"
+                    aria-describedby="source" [(ngModel)]="source">
+                </div>
+                <div class="mb-1 input-group-sm">
+                  <label for="liveCode" class="form-label">liveCode</label>
+                  <input type="text" class="form-control" name="liveCode" value="liveCode" id="liveCode"
+                    aria-describedby="liveCode" [(ngModel)]="liveCode">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <div class="headerEdit">
+                  <div class=" input-group-sm mb-1">
+                    <label for="name" class="form-label">name</label>
+                    <input type="text" class="form-control" name="name" value="name" id="name" aria-describedby="name"
+                      [(ngModel)]="name">
+                  </div>
+                  <div class="delete" (click)="delete(ids, name)">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="tomato" d="M21.5 6a1 1 0 0 1-.883.993L20.5 7h-.845l-1.231 12.52A2.75 2.75 0 0 1 15.687 22H8.313a2.75 2.75 0 0 1-2.737-2.48L4.345 7H3.5a1 1 0 0 1 0-2h5a3.5 3.5 0 1 1 7 0h5a1 1 0 0 1 1 1Zm-7.25 3.25a.75.75 0 0 0-.743.648L13.5 10v7l.007.102a.75.75 0 0 0 1.486 0L15 17v-7l-.007-.102a.75.75 0 0 0-.743-.648Zm-4.5 0a.75.75 0 0 0-.743.648L9 10v7l.007.102a.75.75 0 0 0 1.486 0L10.5 17v-7l-.007-.102a.75.75 0 0 0-.743-.648ZM12 3.5A1.5 1.5 0 0 0 10.5 5h3A1.5 1.5 0 0 0 12 3.5Z"/></svg>
+                  </div>
+                </div>
+                <div class="mb-1 input-group-sm">
+                  <label for="stack" class="form-label">stack</label>
+                  <input type="text" class="form-control" name="stack" value="stack" id="stack" aria-describedby="stack"
+                    [(ngModel)]="stack">
+                </div>
+                <div class="mb-1">
+                  <label for="info" class="form-label">info</label>
+                  <div class="input-group">
+  
+                    <textarea type="text" class="form-control" aria-label="info" name="info" value="info" id="info"
+                      [(ngModel)]="info"></textarea>
+                  </div>
+                </div>
+                <div class="btnsEdit">
+                  <div (click)="cancelar()">
+                    <p>Cancelar</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                      preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                      <path fill="currentColor"
+                        d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
+                    </svg>
+                  </div>
+                  <div (click)="confirmar()">
+                    <p>Aceptar</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                      preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
+                      <path fill="currentColor"
+                        d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Form>
+      </div>
+  
+  
+  
+  
+  
+    </ng-template>
+
+    
+
+    <button class="btnWork" (click)="volver()">
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 1024 1024"><path fill="whitesmoke" d="m272.9 512l265.4-339.1c4.1-5.2.4-12.9-6.3-12.9h-77.3c-4.9 0-9.6 2.3-12.6 6.1L186.8 492.3a31.99 31.99 0 0 0 0 39.5l255.3 326.1c3 3.9 7.7 6.1 12.6 6.1H532c6.7 0 10.4-7.7 6.3-12.9L272.9 512zm304 0l265.4-339.1c4.1-5.2.4-12.9-6.3-12.9h-77.3c-4.9 0-9.6 2.3-12.6 6.1L490.8 492.3a31.99 31.99 0 0 0 0 39.5l255.3 326.1c3 3.9 7.7 6.1 12.6 6.1H836c6.7 0 10.4-7.7 6.3-12.9L576.9 512z"/></svg>
+      <span class="btnSpan"></span>
+    </button>
+    
+  </div>
+</div>
+
+
+

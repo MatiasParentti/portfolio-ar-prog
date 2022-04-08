@@ -5,21 +5,21 @@
       <div class="row">
         <div class="col-1 col-md-2 col-lg-3"></div>
         <div class="col-10 col-md-8 col-lg-6">
-          <form>
+          <Form>
             <div class="mb-3">
               <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="name" />
+              <input type="text" class="form-control" id="name" placeholder="name" [(ngModel)]="name"/>
             </div>
             <div class="mb-3">
               <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" placeholder="name@example.com" />
+              <input type="email" class="form-control" id="email" placeholder="name@example.com" [(ngModel)]="email"/>
             </div>
             <div class="mb-3">
               <label for="consulta" class="form-label">Consulta</label>
-              <textarea class="form-control" id="consulta" rows="3"></textarea>
-              <div type="submit" class="button mt-3">Send</div>
+              <textarea class="form-control" id="consulta" rows="3"[(ngModel)]="consulta" ></textarea>
+              <div type="submit" class="button mt-3" ng-click="$event.preventDefault()" (click)="send()">Send</div>
             </div>
-          </form>
+          </Form>
         </div>
         <div class="col-1 col-md-2 col-lg-3"></div>
       </div>

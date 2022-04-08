@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ServDataService } from '../serv-data.service';
 
 @Component({
   selector: 'app-about',
@@ -6,14 +7,34 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./about.component.css']
 })
 export class AboutComponent implements OnInit {
-  abouText:String ='';
-  session= true;
+
+
+  @Input() session!: boolean;
+
+  newExp = true
+
+  abouText: string  = this.myData.abouText
+  newAbouText: string = ''
   name = 'Matias';
 
-  changeAbout(value:String){
-    this.abouText = value
- }
-  constructor() { }
+  btnNewExp() {
+    if (this.newExp == false) {
+      this.newExp = true
+    } else {
+      this.newExp = false
+    }
+  }
+
+  add() {
+    this.myData.editAbouText(this.newAbouText)
+    this.newExp = true;
+    return false;
+  }
+
+  constructor(private myData: ServDataService) {
+
+    
+  }
 
   ngOnInit(): void {
   }

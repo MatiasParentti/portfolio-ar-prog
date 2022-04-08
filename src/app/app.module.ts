@@ -13,7 +13,20 @@ import { ContactComponent } from './contact/contact.component';
 import { BannerHomeComponent } from './banner-home/banner-home.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule } from '@angular/forms';
+import { ServDeleteService } from './serv-delete.service';
+import { ServDataService } from './serv-data.service';
+import { WorkPageComponent } from './work-page/work-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
+import { RouterModule, Routes } from '@angular/router';
 //import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+const appRoutes: Routes = [
+
+  { path: '', component: HomePageComponent },
+  { path: 'works', component: WorkPageComponent }
+
+]
+
 
 @NgModule({
   declarations: [
@@ -27,14 +40,17 @@ import { FormsModule } from '@angular/forms';
     ContactComponent,
     BannerHomeComponent,
     FooterComponent,
+    WorkPageComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     //FontAwesomeModule
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [ServDeleteService, ServDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

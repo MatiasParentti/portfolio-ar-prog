@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServDataService } from '../serv-data.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,7 +8,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContactComponent implements OnInit {
 
-  constructor() { }
+
+  consulta: string = ' '
+  email: string = ' '
+  name: string = ' '
+
+  send() {
+    const data = {
+      name: this.name,
+      email: this.email,
+      consulta: this.consulta
+    }
+    console.log(data);
+    this.myDataBase.pushNewContact(data)
+    return false
+  }
+
+
+
+  constructor(private myDataBase: ServDataService) { }
 
   ngOnInit(): void {
   }

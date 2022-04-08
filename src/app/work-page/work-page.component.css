@@ -1,3 +1,5 @@
+
+
 .about {
     margin-top: 10px;
     background-color:hsl(195,6%,11%);
@@ -7,62 +9,9 @@
     margin-right: 10rem;
     z-index: 6;
   }
-
-  
-.cardImg:hover .content{
-    top:0; 
-    opacity: 1;
+  .card{
+    background-color: transparent;
   }
-  
-.cardImg .content h3{
-    font-size: 1.5rem;
-    padding-bottom: .5rem;
-  }
-  
- .cardImg .content p{
-    font-size: 1rem;
-  }
-  
-.cardImg::before{
-    height: 100%;
-    width: 100%;
-    content: '';
-    position: absolute;
-    top:0; left: 0;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    background: rgba(23, 27, 35, 0.6);
-    clip-path: circle(18% at 98% 0);
-    transition: .3s linear;
-  }
-  
- .cardImg:hover::before{
-    clip-path: circle(100%);
-  }
-
-  .cardImg{
-    display: flex;
-    position: relative;
-  }
-  .cardImgEdit{
-    position: absolute;
-    margin: 5px;
-    right:0;
-  }
-  .delete{
-    position: absolute;
-    margin-left: 10px;
-    margin-top: 10px;
-    left:0;
-    color: forestgreen;
-  }
-
-  .card-body{
-    justify-content: center;
-    text-align: center;
-    padding: 0.25rem;
-  }
-
   .card{
     margin-top: 5px;
     padding: 5px;
@@ -72,21 +21,16 @@
     background: rgba(23, 27, 35, 0.6);
     border: 1px solid rgba(23, 27, 35, 0.6); 
   }
-
-  .content{
-    height: 100%;
-      width: 100%;
-      position: absolute;
-      top:6rem; left: 0;
-      transition-delay: .3s;
-      display: flex;
-      flex-flow: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
+  svg{
+    height: 30px;
+   width: 30px;
   }
-  .buttonsWork{
-    padding: 10px;
+.btnDown{
+    right: 0;
+    margin: 0.5rem;
+}
+.buttonsWork{
+    padding: 20px;
   }
 
   .btnWork{
@@ -139,15 +83,12 @@
     
   }
 
-  
-   
-   .btnWork:active .btnSpan::before {
-    background: hsl(195,58%,31%) ;
-   }
-   ul li{
-    background-color: #16181f;
-    color: #fff;
+  .headerEdit{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
+  
 
   a,
   a:visited,
@@ -156,50 +97,48 @@
     text-decoration: none;
   }
   
-  svg{
-    height: 20px;
-   width: 20px;
-  }
-
-    .headerEdit{
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
-    }
-    .editCont svg{
    
-      margin-top: 20px;
-    }
+   .btnWork:active .btnSpan::before {
+    background: hsl(195,58%,31%) ;
+   }
 
+   .btnsEdit{
+    display: flex;
+    
+   justify-content: right;
+  
+   margin-top: 1rem;
+  }
+  .btnsEdit svg{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: 0.3rem;
+    margin-right: 0.3rem;
+    width: 25px;
+    height: 25px;
+  }
+  .btnsEdit p{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    
+  }
+  .btnsEdit div{
+    display: flex;}
     .form-control{
       background-color:hsl(200,5%,10%) ;
       border-color: #736b5e;
       color: #fff;
     }
-    .button {
-      display: inline-block;
-      background-color: hsl(195,58%,31%);
-      color: #fff !important;
-      padding: 0.5rem 1.5rem;
-      font-weight: 500;
-      border-radius: 0.5rem;
-      text-decoration: none;
-    }
-  .newCard{
-    text-align: left ;
-   
-  }
 
-     /* Responsive Styles */
-@media screen and (max-width: 990px) {
-    
+  @media screen and (max-width: 990px) {
+ 
     .about {
       margin-right: 2rem;
       margin-left: 2rem;
     }
   }
   @media screen and (max-width: 767px) {
-   
+    
     .about {
       margin-left: 2rem;
       margin-right: 2rem;
@@ -213,6 +152,7 @@
       margin-right: 0rem;
       margin-left: 0rem;
     }
-    
+  
     
   }
+  

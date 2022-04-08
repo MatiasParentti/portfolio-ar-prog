@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { workss } from './workss.component';
+import { ServDeleteService } from '../serv-delete.service';
+import { ServDataService } from '../serv-data.service';
 
 @Component({
   selector: 'app-works',
@@ -7,45 +10,61 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WorksComponent implements OnInit {
 
-  works = [
+  worksGet: any = this.myData.worksGet
 
-    {
-      id: 1,
-      name: 'Fratelli MIP',
-      liveCode: 'https://fratellicontroldeplagas.com.ar/',
-      source: 'https://github.com/MatiasParentti/Fratelli-Web',
-      image: "../assets/work2.jpg",
-      info: 'web app para empresa de servicio'
-    },
-    {
-      id: 2,
-      name: 'Cafe El chiwi',
-      liveCode: 'https://app-cafe-chiwi.herokuapp.com/',
-      source: 'https://github.com/MatiasParentti/App-pedidos-cafe',
-      image: "../assets/work1.png",
-      info: 'web app para gestion de pedidos'
-    },
-    {
-      id: 3,
-      name: 'Agenda Contactos',
-      liveCode: 'https://tranquil-bayou-72096.herokuapp.com/',
-      source: 'https://github.com/MatiasParentti/app-agenda',
-      image: "../assets/agenda.png",
-      info: 'web agenda online'
-    },
-    {
-      id: 4,
-      name: 'Pokedex',
-      liveCode: 'https://app-pokex.herokuapp.com/',
-      source: 'https://github.com/MatiasParentti/pokedex',
-      image: "../assets/pok.png",
-      info: 'pokedex api'
-    },
-  ];
+  @Input() session!: boolean;
 
-  session = true;
+  newWork = false;
 
-  constructor() { }
+  id: number = 0
+  name: string = ' '
+  liveCode: string = ' '
+  source: string = ' '
+  image: string = ' '
+  info: string = ' '
+  stack: string = ' '
+
+  btnNewWork() {
+    if (this.newWork == false) {
+      this.newWork = true
+    } else {
+      this.newWork = false
+    }
+  }
+
+  clear() {
+    this.id = 0,
+      this.name = ' ',
+      this.liveCode = ' ',
+      this.source = ' ',
+      this.image = ' ',
+      this.info = ' ',
+      this.stack = ' '
+  }
+
+  delete(id: number, name: string) {
+    const resp = this.myService.msjAlert('eliminar  ' + name + '?')
+    if (resp) {
+      this.myData.deleteWork(id)
+    }
+    return false
+  }
+  editar() {
+    
+  }
+  add() {
+    const add = new workss(this.worksGet.length + 1, this.name, this.liveCode, this.source, this.image, this.info, this.stack)
+    this.myData.pushNewWork(add)
+    this.clear()
+    this.newWork = false;
+    return false;
+  }
+
+  constructor(private myService: ServDeleteService, private myData: ServDataService) {
+
+
+
+  }
 
   ngOnInit(): void {
   }

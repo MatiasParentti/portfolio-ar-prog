@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ServDeleteService } from '../serv-delete.service';
 import { experiences } from './experiences.component';
-
+import { ServDataService } from '../serv-data.service';
 @Component({
   selector: 'app-experience',
   templateUrl: './experience.component.html',
@@ -10,8 +11,13 @@ import { experiences } from './experiences.component';
 
 export class ExperienceComponent implements OnInit {
 
+  @Input() session!: boolean;
 
-  experiencesGet: any;
+  experiencesGet: any = this.myData.experiencesGet
+
+  index:any;
+
+  ids: number = 0;
 
   id: number = 0
   empresa: string = ' '
@@ -19,9 +25,17 @@ export class ExperienceComponent implements OnInit {
   tareas: string = ' '
   cargo: string = ' '
 
-  session = true;
+  idEdit: number = 0
+  empresaEdit: string = ''
+  fechaEdit: string = ' '
+  tareasEdit: string = ' '
+  cargoEdit: string = ' '
+
+
   newExp = false;
-  index:number = 0;
+  editExp = false;
+
+
 
   btnNewExp() {
     if (this.newExp == false) {
@@ -29,6 +43,28 @@ export class ExperienceComponent implements OnInit {
     } else {
       this.newExp = false
     }
+  }
+
+  edits(id: number) {
+    this.editExp = true;
+    this.ids = id
+    this.index = this.myData.editExp(id)
+    this.empresaEdit = this.index.empresa
+    this.fechaEdit = this.index.fecha
+    this.tareasEdit = this.index.tareas
+    this.cargoEdit = this.index.cargo
+    this.idEdit = this.index.id
+  }
+
+
+
+  cancelar() {
+    this.editExp = false;
+  }
+  confirmar() {
+    const editThis = new experiences(this.idEdit, this.empresaEdit, this.fechaEdit, this.tareasEdit, this.cargoEdit)
+    this.myData.actualizarExp(this.ids,editThis)
+    this.editExp = false;
   }
 
   clear() {
@@ -39,52 +75,34 @@ export class ExperienceComponent implements OnInit {
       this.cargo = ' '
   }
 
-  delete(id:number) {
-    if(this.experiencesGet.length <= 1){
-      this.index = 0;
-    }else{
-      this.index = id-1;
+  delete(id: number, cargo: string, empresa: string) {
+    const resp = this.myService.msjAlert('eliminar  ' + cargo + ' ' + empresa + '?')
+    if (resp) {
+      this.experiencesGet.splice(id, 1)
     }
-    this.experiencesGet.splice(this.index,id)
     return false
   }
 
   add() {
 
-    const agg = new experiences(this.experiencesGet.length + 1, this.empresa, this.fecha, this.tareas, this.cargo)
-    this.experiencesGet.push(agg);
-    console.log(agg)
+    const add = new experiences(this.experiencesGet.length + 1, this.empresa, this.fecha, this.tareas, this.cargo)
+    this.myData.pushNewExp(add)
     this.clear()
     this.newExp = false;
+    this.editExp = false;
     return false;
+
   }
 
-  constructor() {
-
-    this.experiencesGet = [
-
-      {
-        id: 1,
-        empresa: 'Fratelli CDP',
-        fecha: '2021 - Actualidad',
-        tareas: 'Administracion sitio web, Atencion al Cliente',
-        cargo: 'Administracion'
-      },
-      {
-        id: 2,
-        empresa: 'Talex SRL',
-        fecha: '2016 - 2021',
-        tareas: 'Tecnico control de plagas, Cadeteria, Atencion al Cliente',
-        cargo: 'Empleado'
-      },
-
-
-    ]
+  constructor(private myService: ServDeleteService, private myData: ServDataService) {
 
 
   }
 
   ngOnInit(): void {
+
+
+
   }
 
 }
