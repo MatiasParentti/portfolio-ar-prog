@@ -40,22 +40,15 @@ export class StudioComponent implements OnInit {
   }
 
   cancelar() {
+    this.newStudy = false;
     this.editExp = false;
-    this.instituto = ''
-    this.fecha = ''
-    this.programa = ''
-    this.estado = ''
-    this.id = 0
+    this.clear()
   }
   confirmar() {
     const editThis = new studys(this.id, this.instituto, this.fecha, this.programa, this.estado)
     this.myData.actualizarStudy(this.ids, editThis)
     this.editExp = false;
-    this.instituto = ''
-    this.fecha = ''
-    this.programa = ''
-    this.estado = ''
-    this.id = 0
+    this.clear()
   }
 
   btnNewStudy() {

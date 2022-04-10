@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ServDeleteService } from '../serv-delete.service';
 import { experiences } from './experiences.component';
 import { ServDataService } from '../serv-data.service';
+
 @Component({
   selector: 'app-experience',
   templateUrl: './experience.component.html',
@@ -13,9 +14,9 @@ export class ExperienceComponent implements OnInit {
 
   @Input() session!: boolean;
 
-  experiencesGet: any = this.myData.experiencesGet
+  experiencesGet: any
 
-  index:any;
+  index: any;
 
   ids: number = 0;
 
@@ -49,22 +50,25 @@ export class ExperienceComponent implements OnInit {
     this.editExp = true;
     this.ids = id
     this.index = this.myData.editExp(id)
-    this.empresaEdit = this.index.empresa
-    this.fechaEdit = this.index.fecha
-    this.tareasEdit = this.index.tareas
-    this.cargoEdit = this.index.cargo
-    this.idEdit = this.index.id
+    this.empresa = this.index.empresa
+    this.fecha = this.index.fecha
+    this.tareas = this.index.tareas
+    this.cargo = this.index.cargo
+    this.id = this.index.id
   }
 
 
 
   cancelar() {
     this.editExp = false;
+    this.newExp = false;
+    this.clear()
   }
   confirmar() {
-    const editThis = new experiences(this.idEdit, this.empresaEdit, this.fechaEdit, this.tareasEdit, this.cargoEdit)
-    this.myData.actualizarExp(this.ids,editThis)
+    const editThis = new experiences(this.id, this.empresa, this.fecha, this.tareas, this.cargo)
+    this.myData.actualizarExp(this.ids, editThis)
     this.editExp = false;
+    this.clear()
   }
 
   clear() {
@@ -101,6 +105,15 @@ export class ExperienceComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+    this.myData.getExperiences().subscribe(myExp => {
+
+      this.experiencesGet = myExp
+      
+    });
+
+
+    this.experiencesGet = this.myData.experiencesGet
 
 
   }

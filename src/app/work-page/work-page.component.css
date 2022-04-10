@@ -88,6 +88,10 @@
     justify-content: space-between;
     width: 100%;
   }
+  .editCont svg{
+ 
+    margin-top: 20px;
+  }
   
 
   a,
@@ -128,6 +132,10 @@
       background-color:hsl(200,5%,10%) ;
       border-color: #736b5e;
       color: #fff;
+    }
+
+    .btnGit{
+      margin-left: 10px;
     }
 
   @media screen and (max-width: 990px) {

@@ -8,9 +8,7 @@
     z-index: 6;
   }
 
-  .exp :hover{
-    color:hsl(195,58%,31%);
-  }
+
   .header svg{
     width: 20px;
     height:20px;

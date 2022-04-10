@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "comp": "ng g c home-page"
+    "comp": "ng g c login"
   },
   "private": true,
   "dependencies": {

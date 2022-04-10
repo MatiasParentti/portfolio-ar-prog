@@ -51,42 +51,73 @@
 
     </div>
 
-
     <ng-template #new>
-      <div class="card mt-1">
-        <h5 class="card-header">Agregar Estudio</h5>
-        <div class="card-body">
-          <Form>
-            <div class="mb-1">
-              <label for="instituto" class="form-label">instituto</label>
-              <input type="text" class="form-control" name="instituto" value="instituto" id="instituto"
-                aria-describedby="emailHelp" [(ngModel)]="instituto">
-            </div>
-            <div class="mb-1">
-              <label for="programa" class="form-label">programa</label>
-              <input type="text" class="form-control" name="programa" value="programa" id="programa"
-                aria-describedby="emailHelp" [(ngModel)]="programa">
-            </div>
-            <div class="mb-1">
-              <label for="estado" class="form-label">estado</label>
-              <input type="text" class="form-control" name="estado" value="estado" id="estado"
-                aria-describedby="emailHelp" [(ngModel)]="estado">
-            </div>
-            <div class="mb-1">
-              <label for="fecha" class="form-label">fecha</label>
-              <input type="text" class="form-control" name="fecha" value="fecha" id="fecha" aria-describedby="emailHelp"
-                [(ngModel)]="fecha">
+      <div class="exp">
+        <div class="list-group">
+          <div class="list-group-item list-group-item-action target">
+            <div class="d-flex w-100 justify-content-between header">
+              <div class="head">
+                <div>
+                </div>
+
+                <div class="mb-1">
+                  <label for="programa" class="form-label">programa
+                  </label>
+                  <input type="text" class="form-control" name="programa" value="programa" id="programa"
+                    aria-describedby="programa" [(ngModel)]="programa">
+                </div>
+
+              </div>
+
+              <div class="mb-1">
+                <label for="fecha" class="form-label"><small>fecha
+
+                  </small>
+                </label>
+                <input type="text" class="form-control" name="fecha" value="fecha" id="fecha" aria-describedby="fecha"
+                  [(ngModel)]="fecha">
+
+              </div>
+
             </div>
 
-            <div class="mt-1 btnsEdit" ng-click="$event.preventDefault()" type="submit" value="add" (click)="add()">
-              <p>Agregar</p>
-              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
-                <path fill="currentColor"
-                  d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
-              </svg>
+            <div class="mb-1">
+              <label for="instituto" class="form-label">instituto
+              </label>
+              <input type="text" class="form-control" name="instituto" value="instituto" id="instituto"
+                aria-describedby="instituto" [(ngModel)]="instituto">
             </div>
-          </Form>
+
+
+            <div class="expEdit">
+              <div class="mb-1">
+                <label for="estado" class="form-label">estado
+                </label>
+                <input type="text" class="form-control" name="estado" value="estado" id="estado"
+                  aria-describedby="estado" [(ngModel)]="estado">
+              </div>
+            </div>
+
+            <div class="btnsEdit">
+              <div (click)="cancelar()">
+                <p>Cancelar</p>
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                  <path fill="currentColor"
+                    d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
+                </svg>
+              </div>
+              <div (click)="add()" ng-click="$event.preventDefault()" type="submit" value="add">
+                <p>Agregar</p>
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
+                  <path fill="currentColor"
+                    d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
+                </svg>
+              </div>
+            </div>
+
+          </div>
         </div>
       </div>
     </ng-template>
@@ -148,7 +179,7 @@
                 </svg>
               </div>
               <div (click)="confirmar()">
-                <p>Aceptar</p>
+                <p>Guardar</p>
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
                   preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
                   <path fill="currentColor"

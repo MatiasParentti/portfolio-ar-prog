@@ -1,9 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServDataService {
+
+
 
   contact: any = [];
 
@@ -78,32 +81,15 @@ export class ServDataService {
       estado: 'Finalizado'
     },
   ];
-
-  experiencesGet = [
-
-    {
-      id: 1,
-      empresa: 'Fratelli CDP',
-      fecha: '2021 - Actualidad',
-      tareas: 'Administracion sitio web, Atencion al Cliente',
-      cargo: 'Administracion'
-    },
-    {
-      id: 2,
-      empresa: 'Talex SRL',
-      fecha: '2016 - 2021',
-      tareas: 'Tecnico control de plagas, Cadeteria, Atencion al Cliente',
-      cargo: 'Empleado'
-    },
-
-
-  ]
+  experiencesGet: any = []
+ 
 
   abouText: string = 'I m a self-taught Full-Stack Developer who works everyday to become a better programmer. I ve been able to learn a lot a different technologies that have given me jobs and let me create personal projects around my things of my interest';
 
 
   pushNewExp(newData: any) {
     this.experiencesGet.push(newData);
+    this.dataService.guardarExp(this.experiencesGet)
   }
   pushNewWork(newData: any) {
     this.worksGet.push(newData);
@@ -162,5 +148,25 @@ export class ServDataService {
     this.experiencesGet.splice(id, 1)
   }
 
-  constructor() { }
+
+  getExperiences() {
+    return this.dataService.cargarExp()
+  }
+
+
+
+
+  constructor(private dataService: DataService) {
+
+    this.getExperiences().subscribe(myExp => {
+
+      this.experiencesGet = myExp
+      
+    });
+
+
+  }
+
+
+
 }

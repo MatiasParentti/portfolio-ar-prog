@@ -145,7 +145,7 @@
     background: hsl(195,58%,31%) ;
    }
    ul li{
-    background-color: #16181f;
+    background-color:transparent;
     color: #fff;
   }
 
@@ -159,6 +159,14 @@
   svg{
     height: 20px;
    width: 20px;
+  }
+  .btnGit{
+    margin-left: 10px;
+  }
+  .btnGit  
+  svg{
+    height: 25px;
+   width: 25px;
   }
 
     .headerEdit{

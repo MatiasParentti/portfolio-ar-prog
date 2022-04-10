@@ -12,19 +12,23 @@ import { SkillsComponent } from './skills/skills.component';
 import { ContactComponent } from './contact/contact.component';
 import { BannerHomeComponent } from './banner-home/banner-home.component';
 import { FooterComponent } from './footer/footer.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ServDeleteService } from './serv-delete.service';
 import { ServDataService } from './serv-data.service';
 import { WorkPageComponent } from './work-page/work-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { RouterModule, Routes } from '@angular/router';
+import { DataService } from './data.service';
+import {HttpClientModule} from '@angular/common/http';
+import { LoginComponent } from './login/login.component'
 //import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 const appRoutes: Routes = [
 
   { path: '', component: HomePageComponent },
-  { path: 'works', component: WorkPageComponent }
-
+  { path: 'works', component: WorkPageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '**', redirectTo: '/'}
 ]
 
 
@@ -42,15 +46,18 @@ const appRoutes: Routes = [
     FooterComponent,
     WorkPageComponent,
     HomePageComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     //FontAwesomeModule
     FormsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+    ReactiveFormsModule
   ],
-  providers: [ServDeleteService, ServDataService],
+  providers: [ServDeleteService, ServDataService,DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
