@@ -53,144 +53,246 @@
 
     <ng-template #new>
       <div class="exp">
-        <div class="list-group">
-          <div class="list-group-item list-group-item-action target">
-            <div class="d-flex w-100 justify-content-between header">
-              <div class="head">
-                <div>
+        <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action target">
+              <div class="d-flex w-100 justify-content-between header">
+                <div class="head">
+                  <div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="newPrograma" class="form-label">programa
+                    </label>
+                    <input type="text" class="form-control" aria-describedby="newPrograma" id="newPrograma"
+                      placeholder="Programa" formControlName="programa"
+                      [ngStyle]="{'border-color':( Programa?.errors &&  Programa?.touched) ? 'tomato' : '#736b5e', 'color':( Programa?.errors &&  Programa?.touched) ? 'tomato' : 'whitesmoke' }">
+                    <div class="error" *ngIf="Programa?.errors  && Programa?.touched">
+                      <p *ngIf="Programa?.hasError('required')" class="error mt-1">
+                        Programa es requerido.
+                      </p>
+                      <p *ngIf="Programa?.errors?.['minlength']" class="error mt-1">
+                        El User debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="Programa?.errors?.['maxlength']" class="error mt-1">
+                        El User debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+                  </div>
+
                 </div>
 
                 <div class="mb-1">
-                  <label for="programa" class="form-label">programa
+                  <label for="newFecha" class="form-label"><small>fecha
+                    </small>
                   </label>
-                  <input type="text" class="form-control" name="programa" value="programa" id="programa"
-                    aria-describedby="programa" [(ngModel)]="programa">
+                  <input type="text" class="form-control" id="newFecha" aria-describedby="newFecha" placeholder="Fecha"
+                    formControlName="fecha"
+                    [ngStyle]="{'border-color':(Fecha?.errors && Fecha?.touched) ? 'tomato' : '#736b5e', 'color':(Fecha?.errors && Fecha?.touched) ? 'tomato' : 'whitesmoke' }">
+                  <div class="error" *ngIf="Fecha?.errors  && Fecha?.touched">
+                    <p *ngIf="Fecha?.hasError('required')" class="error mt-1">
+                      Fecha es requerido.
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['minlength']" class="error mt-1">
+                      La fecha debe ser de 9 caracteres. 2222-2222
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['maxlength']" class="error mt-1">
+                      La fecha debe ser menor a 10 caracteres. 2222-2222
+                    </p>
+                  </div>
                 </div>
 
               </div>
 
               <div class="mb-1">
-                <label for="fecha" class="form-label"><small>fecha
-
-                  </small>
+                <label for="newInstituto" class="form-label">instituto
                 </label>
-                <input type="text" class="form-control" name="fecha" value="fecha" id="fecha" aria-describedby="fecha"
-                  [(ngModel)]="fecha">
+                <input type="text" class="form-control" id="newInstituto" aria-describedby="newInstituto"
+                  placeholder="Instituto" formControlName="instituto"
+                  [ngStyle]="{'border-color':( Instituto?.errors &&  Instituto?.touched) ? 'tomato' : '#736b5e', 'color':( Instituto?.errors &&  Instituto?.touched) ? 'tomato' : 'whitesmoke' }">
+                <div class="error" *ngIf="Instituto?.errors  && Instituto?.touched">
+                  <p *ngIf="Instituto?.hasError('required')" class="error mt-1">
+                    Instituto es requerido.
+                  </p>
+                  <p *ngIf="Instituto?.errors?.['minlength']" class="error mt-1">
+                    El User debe ser de 5 o más caracteres.
+                  </p>
+                  <p *ngIf="Instituto?.errors?.['maxlength']" class="error mt-1">
+                    El User debe ser menor a 12 caracteres.
+                  </p>
+                </div>
+              </div>
 
+
+              <div class="expEdit">
+                <div class="mb-1">
+                  <label for="newEstado" class="form-label">estado
+                  </label>
+                  <input type="text" class="form-control" id="newEstado" aria-describedby="newEstado"
+                    placeholder="Estado" formControlName="estado"
+                    [ngStyle]="{'border-color':(Estado?.errors && Estado?.touched) ? 'tomato' : '#736b5e', 'color':(Estado?.errors && Estado?.touched) ? 'tomato' : 'whitesmoke' }">
+                  <div class="error" *ngIf="Estado?.errors  && Estado?.touched">
+                    <p *ngIf="Estado?.hasError('required')" class="error mt-1">
+                      Estado es requerido. en curso/finalizado
+                    </p>
+                    <p *ngIf="Estado?.errors?.['minlength']" class="error mt-1">
+                      El User debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Estado?.errors?.['maxlength']" class="error mt-1">
+                      El User debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="btnsEdit">
+                <button class="button" type="submit">
+                  <div (click)="cancelar()">
+                    <p>Cancelar</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                      preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                      <path fill="currentColor"
+                        d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
+                    </svg>
+                  </div>
+                </button>
+                <button class="button" type="submit">
+                  <p>Agregar</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
+                    <path fill="currentColor"
+                      d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
+                  </svg>
+                </button>
               </div>
 
             </div>
-
-            <div class="mb-1">
-              <label for="instituto" class="form-label">instituto
-              </label>
-              <input type="text" class="form-control" name="instituto" value="instituto" id="instituto"
-                aria-describedby="instituto" [(ngModel)]="instituto">
-            </div>
-
-
-            <div class="expEdit">
-              <div class="mb-1">
-                <label for="estado" class="form-label">estado
-                </label>
-                <input type="text" class="form-control" name="estado" value="estado" id="estado"
-                  aria-describedby="estado" [(ngModel)]="estado">
-              </div>
-            </div>
-
-            <div class="btnsEdit">
-              <div (click)="cancelar()">
-                <p>Cancelar</p>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                  <path fill="currentColor"
-                    d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
-                </svg>
-              </div>
-              <div (click)="add()" ng-click="$event.preventDefault()" type="submit" value="add">
-                <p>Agregar</p>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
-                  <path fill="currentColor"
-                    d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
-                </svg>
-              </div>
-            </div>
-
           </div>
-        </div>
+        </form>
       </div>
     </ng-template>
 
+
+    
     <ng-template #edit>
       <div class="exp">
-        <div class="list-group">
-          <div class="list-group-item list-group-item-action target">
-            <div class="d-flex w-100 justify-content-between header">
-              <div class="head">
-                <div>
+        <form [formGroup]="form" (ngSubmit)="onEdit($event)">
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action target">
+              <div class="d-flex w-100 justify-content-between header">
+                <div class="head">
+                  <div>
+                  </div>
+
+                  <div class="mb-1">
+                    <label for="newPrograma" class="form-label">programa
+                    </label>
+                    <input type="text" class="form-control" aria-describedby="newPrograma" id="newPrograma"
+                      placeholder="Programa" formControlName="programa"
+                      [ngStyle]="{'border-color':( Programa?.errors &&  Programa?.touched) ? 'tomato' : '#736b5e', 'color':( Programa?.errors &&  Programa?.touched) ? 'tomato' : 'whitesmoke' }">
+                    <div class="error" *ngIf="Programa?.errors  && Programa?.touched">
+                      <p *ngIf="Programa?.hasError('required')" class="error mt-1">
+                        Programa es requerido.
+                      </p>
+                      <p *ngIf="Programa?.errors?.['minlength']" class="error mt-1">
+                        El User debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="Programa?.errors?.['maxlength']" class="error mt-1">
+                        El User debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+                  </div>
+
                 </div>
 
                 <div class="mb-1">
-                  <label for="programa" class="form-label">programa
+                  <label for="newFecha" class="form-label"><small>fecha
+                    </small>
                   </label>
-                  <input type="text" class="form-control" name="programa" value="programa" id="programa"
-                    aria-describedby="programa" [(ngModel)]="programa">
+                  <input type="text" class="form-control" id="newFecha" aria-describedby="newFecha" placeholder="Fecha"
+                    formControlName="fecha"
+                    [ngStyle]="{'border-color':(Fecha?.errors && Fecha?.touched) ? 'tomato' : '#736b5e', 'color':(Fecha?.errors && Fecha?.touched) ? 'tomato' : 'whitesmoke' }">
+                  <div class="error" *ngIf="Fecha?.errors  && Fecha?.touched">
+                    <p *ngIf="Fecha?.hasError('required')" class="error mt-1">
+                      Fecha es requerido.
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['minlength']" class="error mt-1">
+                      La fecha debe ser de 9 caracteres. 2222-2222
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['maxlength']" class="error mt-1">
+                      La fecha debe ser menor a 10 caracteres. 2222-2222
+                    </p>
+                  </div>
                 </div>
 
               </div>
 
               <div class="mb-1">
-                <label for="fecha" class="form-label"><small>fecha
-
-                  </small>
+                <label for="newInstituto" class="form-label">instituto
                 </label>
-                <input type="text" class="form-control" name="fecha" value="fecha" id="fecha" aria-describedby="fecha"
-                  [(ngModel)]="fecha">
-
+                <input type="text" class="form-control" id="newInstituto" aria-describedby="newInstituto"
+                  placeholder="Instituto" formControlName="instituto"
+                  [ngStyle]="{'border-color':( Instituto?.errors &&  Instituto?.touched) ? 'tomato' : '#736b5e', 'color':( Instituto?.errors &&  Instituto?.touched) ? 'tomato' : 'whitesmoke' }">
+                <div class="error" *ngIf="Instituto?.errors  && Instituto?.touched">
+                  <p *ngIf="Instituto?.hasError('required')" class="error mt-1">
+                    Instituto es requerido.
+                  </p>
+                  <p *ngIf="Instituto?.errors?.['minlength']" class="error mt-1">
+                    El User debe ser de 5 o más caracteres.
+                  </p>
+                  <p *ngIf="Instituto?.errors?.['maxlength']" class="error mt-1">
+                    El User debe ser menor a 12 caracteres.
+                  </p>
+                </div>
               </div>
 
-            </div>
 
-            <div class="mb-1">
-              <label for="instituto" class="form-label">instituto
-              </label>
-              <input type="text" class="form-control" name="instituto" value="instituto" id="instituto"
-                aria-describedby="instituto" [(ngModel)]="instituto">
-            </div>
-
-
-            <div class="expEdit">
-              <div class="mb-1">
-                <label for="estado" class="form-label">estado
-                </label>
-                <input type="text" class="form-control" name="estado" value="estado" id="estado"
-                  aria-describedby="estado" [(ngModel)]="estado">
+              <div class="expEdit">
+                <div class="mb-1">
+                  <label for="newEstado" class="form-label">estado
+                  </label>
+                  <input type="text" class="form-control" id="newEstado" aria-describedby="newEstado"
+                    placeholder="Estado" formControlName="estado"
+                    [ngStyle]="{'border-color':(Estado?.errors && Estado?.touched) ? 'tomato' : '#736b5e', 'color':(Estado?.errors && Estado?.touched) ? 'tomato' : 'whitesmoke' }">
+                  <div class="error" *ngIf="Estado?.errors  && Estado?.touched">
+                    <p *ngIf="Estado?.hasError('required')" class="error mt-1">
+                      Estado es requerido. en curso/finalizado
+                    </p>
+                    <p *ngIf="Estado?.errors?.['minlength']" class="error mt-1">
+                      El User debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Estado?.errors?.['maxlength']" class="error mt-1">
+                      El User debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="btnsEdit">
-              <div (click)="cancelar()">
-                <p>Cancelar</p>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                  <path fill="currentColor"
-                    d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
-                </svg>
+              <div class="btnsEdit">
+                <button (click)="cancelar()">
+                  <p>Cancelar</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
+                  </svg>
+                </button >
+                <button type="submit">
+                  <p>Guardar</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
+                    <path fill="currentColor"
+                      d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
+                  </svg>
+                </button >
               </div>
-              <div (click)="confirmar()">
-                <p>Guardar</p>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
-                  <path fill="currentColor"
-                    d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
-                </svg>
-              </div>
-            </div>
+          
 
+            </div>
           </div>
-        </div>
+        </form>
       </div>
+      
     </ng-template>
 
   </div>

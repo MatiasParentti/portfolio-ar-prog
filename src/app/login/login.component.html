@@ -8,12 +8,13 @@
         <div class="col-1 col-md-2 col-lg-3"></div>
         <div class="col-10 col-md-8 col-lg-6">
           <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
+
             <div class="mb-3">
               <label for="user" class="form-label">user</label>
-              <input [ngStyle]="{'border-color':(User?.errors && User?.touched) ? 'tomato' : '#736b5e', 'color':(User?.errors && User?.touched) ? 'tomato' : 'whitesmoke' }" type="text" class="form-control" id="user" placeholder="user" formControlName="user" />
+              <input [ngStyle]="{'border-color':(User?.errors && User?.touched) ? 'tomato' : '#736b5e', 'color':(User?.errors && User?.touched) ? 'tomato' : 'whitesmoke' }" type="text" class="form-control" id="user" placeholder="user" formControlName="user" autocomplete="username"/>
               <div *ngIf="User?.errors  && User?.touched">
                 <p *ngIf="User?.hasError('required')" class="error mt-1">
-                  El email es requerido.
+                  El User es requerido.
                 </p>
                 <p *ngIf="User?.errors?.['minlength']" class="error mt-1">
                   El User debe ser de 5 o más caracteres.
@@ -23,10 +24,11 @@
                 </p>
               </div>
             </div>
+            
             <div class="mb-3">
               <label for="password" class="form-label">password</label>
               <input [ngStyle]="{'border-color':(Password?.errors && Password?.touched) ? 'tomato' : '#736b5e','color':(Password?.errors && Password?.touched) ? 'tomato' : 'whitesmoke'}"  type="password" class="form-control" id="password" placeholder="password"
-                formControlName="password" />
+                formControlName="password" autocomplete="current-password" />
               <div *ngIf="Password?.errors  && Password?.touched">
                 <p *ngIf="Password?.hasError('required')" class="error mt-1">
                   El password es requerido.

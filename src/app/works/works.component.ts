@@ -9,20 +9,27 @@ import { Router } from '@angular/router';
 })
 export class WorksComponent implements OnInit {
 
-  worksGet: any = this.myData.worksGet
+  worksGet: any
 
   @Input() session!: boolean;
 
- 
 
 
-  constructor(private myData: ServDataService,private router: Router) {
+
+  constructor(private myData: ServDataService, private router: Router) {
 
 
 
   }
 
   ngOnInit(): void {
+
+    this.myData.getWorks().subscribe(myWork => {
+
+      this.worksGet = myWork
+
+    });
+
   }
 
 }

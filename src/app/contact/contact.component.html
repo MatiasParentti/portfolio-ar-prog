@@ -1,27 +1,68 @@
 <div class="contact" id="contact">
-    <div class="about">
-      <h2>Contact</h2>
+  <div class="about">
+    <h2>Contact</h2>
 
-      <div class="row">
-        <div class="col-1 col-md-2 col-lg-3"></div>
-        <div class="col-10 col-md-8 col-lg-6">
-          <Form>
-            <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
-              <input type="text" class="form-control" id="name" placeholder="name" [(ngModel)]="name"/>
+    <div class="row">
+      <div class="col-1 col-md-2 col-lg-3"></div>
+      <div class="col-10 col-md-8 col-lg-6">
+        <form #myForm="ngForm" [formGroup]="form" (ngSubmit)="onEnviar($event);">
+
+          <div class="mb-3 ">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="name" formControlName="name"
+              [ngStyle]="{'border-color':(Name?.errors && Name?.touched) ? 'tomato' : '#736b5e', 'color':(Name?.errors && Name?.touched) ? 'tomato' : 'whitesmoke' }" />
+            <div class="error" *ngIf="Name?.errors  && Name?.touched">
+              <p *ngIf="Name?.hasError('required')" class="error mt-1">
+                Name es requerido.
+              </p>
+              <p *ngIf="Name?.errors?.['minlength']" class="error mt-1">
+                El Name debe ser de 3 o más caracteres.
+              </p>
+              <p *ngIf="Name?.errors?.['maxlength']" class="error mt-1">
+                El Name debe ser menor a 15 caracteres.
+              </p>
             </div>
-            <div class="mb-3">
-              <label for="email" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="email" placeholder="name@example.com" [(ngModel)]="email"/>
+          </div>
+
+          <div class="mb-3 ">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email"
+              [ngStyle]="{'border-color':(Email?.errors && Email?.touched) ? 'tomato' : '#736b5e', 'color':(Email?.errors && Email?.touched) ? 'tomato' : 'whitesmoke' }" />
+            <div class="error" *ngIf="Email?.errors  && Email?.touched">
+              <p *ngIf="Email?.hasError('required')" class="error mt-1">
+                Email es requerido.
+              </p>
+              <p *ngIf="Email?.errors?.['email']" class="error mt-1">
+                El formato debe ser Email
+              </p>
             </div>
-            <div class="mb-3">
-              <label for="consulta" class="form-label">Consulta</label>
-              <textarea class="form-control" id="consulta" rows="3"[(ngModel)]="consulta" ></textarea>
-              <div type="submit" class="button mt-3" ng-click="$event.preventDefault()" (click)="send()">Send</div>
+          </div>
+
+          <div class="mb-3">
+            <label for="consulta" class="form-label">Consulta</label>
+            <textarea class="form-control" id="consulta" rows="3" formControlName="consulta"
+              [ngStyle]="{'border-color':(Consulta?.errors && Consulta?.touched) ? 'tomato' : '#736b5e', 'color':(Consulta?.errors && Consulta?.touched) ? 'tomato' : 'whitesmoke' }"></textarea>
+            <div class="error" *ngIf="Consulta?.errors  && Consulta?.touched">
+              <p *ngIf="Consulta?.hasError('required')" class="error mt-1">
+                Consulta es requerido.
+              </p>
+              <p *ngIf="Consulta?.errors?.['maxlength']" class="error mt-1">
+                Consulta no puede superar los 1000 caracteres.
+              </p>
             </div>
-          </Form>
-        </div>
-        <div class="col-1 col-md-2 col-lg-3"></div>
+          </div>
+
+
+
+          <button class="button mt-1" type="submit">
+            <p>Send</p>
+          </button>
+
+
+
+        </form>
       </div>
+      <div class="col-1 col-md-2 col-lg-3"></div>
     </div>
   </div>
+</div>

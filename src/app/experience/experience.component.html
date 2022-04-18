@@ -73,145 +73,258 @@
 
     </div>
 
+
+
+
     <ng-template #edit>
-      <div class="exp">
-        <div class="list-group">
-          <div class="list-group-item list-group-item-action target">
-            <div class="d-flex w-100 justify-content-between header">
-              <div class="head">
-                <div>
+      <div class="exp" id="newExperience">
+        <form [formGroup]="form" (ngSubmit)="onEdit($event)">
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action target">
+              <div class="d-flex w-100 justify-content-between header">
+                <div class="head">
+                  <div>
+                  </div>
+
+                  <div class="mb-1 inputs">
+                    <label for="newCargo" class="form-label">Cargo
+                    </label>
+                    <input type="text" class="form-control" id="newCargo" placeholder="Cargo"
+                      aria-describedby="newCargo" formControlName="cargo"
+                      [ngStyle]="{'border-color':(Cargo?.errors && Cargo?.touched) ? 'tomato' : '#736b5e', 'color':(Cargo?.errors && Cargo?.touched) ? 'tomato' : 'whitesmoke' }">
+                    <div *ngIf="Cargo?.errors  && Cargo?.touched">
+                      <p *ngIf="Cargo?.hasError('required')" class="error mt-1">
+                        El Cargo es requerido.
+                      </p>
+                      <p *ngIf="Cargo?.errors?.['minlength']" class="error mt-1">
+                        El User debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="Cargo?.errors?.['maxlength']" class="error mt-1">
+                        El User debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+                  </div>
+
                 </div>
 
-                <div class="mb-1">
-                  <label for="cargoEdit" class="form-label">cargoEdit
+                <div class="mb-1 inputs">
+                  <label for="newFecha" class="form-label"><small>Fecha
+                    </small>
                   </label>
-                  <input type="text" class="form-control" name="cargoEdit" value="cargoEdit" id="cargoEdit"
-                    aria-describedby="cargoEdit" [(ngModel)]="cargo">
+                  <input placeholder="desde-hasta" formControlName="fecha"
+                    [ngStyle]="{'border-color':(Fecha?.errors && Fecha?.touched) ? 'tomato' : '#736b5e', 'color':(Fecha?.errors && Fecha?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newFecha" aria-describedby="newFecha">
+                  <div *ngIf="Fecha?.errors  && Fecha?.touched">
+                    <p *ngIf="Fecha?.hasError('required')" class="error mt-1">
+                      Fecha es requerido. 2222-2222
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['minlength']" class="error mt-1">
+                      El Fecha debe ser de 9 caracteres.
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['maxlength']" class="error mt-1">
+                      El Fecha debe ser menor a 10 caracteres.
+                    </p>
+                  </div>
+
                 </div>
 
               </div>
 
-              <div class="mb-1">
-                <label for="fechaEdit" class="form-label"><small>fechaEdit
-
-                  </small>
+              <div class="mb-1 inputs">
+                <label for="newTareas" class="form-label">Tareas
                 </label>
-                <input type="text" class="form-control" name="fechaEdit" value="fechaEdit" id="fechaEdit"
-                  aria-describedby="fechaEdit" [(ngModel)]="fecha">
-
+                <input
+                  [ngStyle]="{'border-color':(Tareas?.errors && Tareas?.touched) ? 'tomato' : '#736b5e', 'color':(Tareas?.errors && Tareas?.touched) ? 'tomato' : 'whitesmoke' }"
+                  type="text" class="form-control" id="newTareas" placeholder="Tareas" formControlName="tareas"
+                  aria-describedby="newTareas">
+                <div *ngIf="Tareas?.errors  && Tareas?.touched">
+                  <p *ngIf="Tareas?.hasError('required')" class="error mt-1">
+                    Tareas es requerido.
+                  </p>
+                  <p *ngIf="Fecha?.errors?.['minlength']" class="error mt-1">
+                    El Fecha debe ser de 5 o más caracteres.
+                  </p>
+                  <p *ngIf="Fecha?.errors?.['maxlength']" class="error mt-1">
+                    El Fecha debe ser menor a 12 caracteres.
+                  </p>
+                </div>
               </div>
 
-            </div>
 
-            <div class="mb-1">
-              <label for="tareasEdit" class="form-label">tareasEdit
-              </label>
-              <input type="text" class="form-control" name="tareasEdit" value="tareasEdit" id="tareasEdit"
-                aria-describedby="tareasEdit" [(ngModel)]="tareas">
-            </div>
-
-
-            <div class="expEdit">
-              <div class="mb-1">
-                <label for="empresaEdit" class="form-label">empresaEdit
-                </label>
-                <input type="text" class="form-control" name="empresaEdit" value="empresaEdit" id="empresaEdit"
-                  aria-describedby="empresaEdit" [(ngModel)]="empresa">
+              <div class="expEdit">
+                <div class="mb-1 inputs">
+                  <label for="newEmpresa" class="form-label">Empresa
+                  </label>
+                  <input type="text" class="form-control"
+                    [ngStyle]="{'border-color':(Empresa?.errors && Empresa?.touched) ? 'tomato' : '#736b5e', 'color':(Empresa?.errors && Empresa?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newEmpresa" placeholder="Empresa" formControlName="empresa"
+                    aria-describedby="newEmpresa">
+                  <div *ngIf="Empresa?.errors  && Empresa?.touched">
+                    <p *ngIf="Empresa?.hasError('required')" class="error mt-1">
+                      Empresa es requerido.
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['minlength']" class="error mt-1">
+                      El Fecha debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['maxlength']" class="error mt-1">
+                      El Fecha debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="btnsEdit">
-              <div (click)="cancelar()">
-                <p>Cancelar</p>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                  <path fill="currentColor"
-                    d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
-                </svg>
+              <div class="btnsEdit">
+                <button class="button">
+                  <div (click)="cancelar()">
+                    <p>Cancelar</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                      preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                      <path fill="currentColor"
+                        d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
+                    </svg>
+                  </div>
+                </button>
+                <button class="button" type="submit">
+                  <div>
+                    <p>Guardar</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                      preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
+                      <path fill="currentColor"
+                        d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
+                    </svg>
+                  </div>
+                </button>
               </div>
-              <div (click)="confirmar()">
-                <p>Guardar</p>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
-                  <path fill="currentColor"
-                    d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
-                </svg>
-              </div>
-            </div>
 
+
+            </div>
           </div>
-        </div>
+        </form>
       </div>
     </ng-template>
 
+
     <ng-template #new>
       <div class="exp" id="newExperience">
-        <div class="list-group">
-          <div class="list-group-item list-group-item-action target">
-            <div class="d-flex w-100 justify-content-between header">
-              <div class="head">
-                <div>
+        <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action target">
+              <div class="d-flex w-100 justify-content-between header">
+                <div class="head">
+                  <div>
+                  </div>
+
+                  <div class="mb-1 inputs">
+                    <label for="newCargo" class="form-label">Cargo
+                    </label>
+                    <input type="text" class="form-control" id="newCargo" placeholder="Cargo"
+                      aria-describedby="newCargo" formControlName="cargo"
+                      [ngStyle]="{'border-color':(Cargo?.errors && Cargo?.touched) ? 'tomato' : '#736b5e', 'color':(Cargo?.errors && Cargo?.touched) ? 'tomato' : 'whitesmoke' }">
+                    <div *ngIf="Cargo?.errors  && Cargo?.touched">
+                      <p *ngIf="Cargo?.hasError('required')" class="error mt-1">
+                        El Cargo es requerido.
+                      </p>
+                      <p *ngIf="Cargo?.errors?.['minlength']" class="error mt-1">
+                        El User debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="Cargo?.errors?.['maxlength']" class="error mt-1">
+                        El User debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+                  </div>
+
                 </div>
 
-                <div class="mb-1">
-                  <label for="cargoEdit" class="form-label">cargoEdit
+                <div class="mb-1 inputs">
+                  <label for="newFecha" class="form-label"><small>Fecha
+                    </small>
                   </label>
-                  <input type="text" class="form-control" name="cargoEdit" value="cargoEdit" id="cargoEdit"
-                    aria-describedby="cargoEdit" [(ngModel)]="cargo">
+                  <input placeholder="desde-hasta" formControlName="fecha"
+                    [ngStyle]="{'border-color':(Fecha?.errors && Fecha?.touched) ? 'tomato' : '#736b5e', 'color':(Fecha?.errors && Fecha?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newFecha" aria-describedby="newFecha">
+                  <div *ngIf="Fecha?.errors  && Fecha?.touched">
+                    <p *ngIf="Fecha?.hasError('required')" class="error mt-1">
+                      Fecha es requerido. 2222-2222
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['minlength']" class="error mt-1">
+                      El Fecha debe ser de 9 caracteres.
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['maxlength']" class="error mt-1">
+                      El Fecha debe ser menor a 10 caracteres.
+                    </p>
+                  </div>
+
                 </div>
 
               </div>
 
-              <div class="mb-1">
-                <label for="fechaEdit" class="form-label"><small>fechaEdit
-
-                  </small>
+              <div class="mb-1 inputs">
+                <label for="newTareas" class="form-label">Tareas
                 </label>
-                <input type="text" class="form-control" name="fechaEdit" value="fechaEdit" id="fechaEdit"
-                  aria-describedby="fechaEdit" [(ngModel)]="fecha">
+                <input
+                  [ngStyle]="{'border-color':(Tareas?.errors && Tareas?.touched) ? 'tomato' : '#736b5e', 'color':(Tareas?.errors && Tareas?.touched) ? 'tomato' : 'whitesmoke' }"
+                  type="text" class="form-control" id="newTareas" placeholder="Tareas" formControlName="tareas"
+                  aria-describedby="newTareas">
+                <div *ngIf="Tareas?.errors  && Tareas?.touched">
+                  <p *ngIf="Tareas?.hasError('required')" class="error mt-1">
+                    Tareas es requerido.
+                  </p>
+                  <p *ngIf="Fecha?.errors?.['minlength']" class="error mt-1">
+                    El Fecha debe ser de 5 o más caracteres.
+                  </p>
+                  <p *ngIf="Fecha?.errors?.['maxlength']" class="error mt-1">
+                    El Fecha debe ser menor a 12 caracteres.
+                  </p>
+                </div>
+              </div>
 
+
+              <div class="expEdit">
+                <div class="mb-1 inputs">
+                  <label for="newEmpresa" class="form-label">Empresa
+                  </label>
+                  <input type="text" class="form-control"
+                    [ngStyle]="{'border-color':(Empresa?.errors && Empresa?.touched) ? 'tomato' : '#736b5e', 'color':(Empresa?.errors && Empresa?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newEmpresa" placeholder="Empresa" formControlName="empresa"
+                    aria-describedby="newEmpresa">
+                  <div *ngIf="Empresa?.errors  && Empresa?.touched">
+                    <p *ngIf="Empresa?.hasError('required')" class="error mt-1">
+                      Empresa es requerido.
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['minlength']" class="error mt-1">
+                      El Fecha debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Fecha?.errors?.['maxlength']" class="error mt-1">
+                      El Fecha debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="btnsEdit">
+                <button class="button" type="submit">
+                  <div (click)="cancelar()">
+                    <p>Cancelar</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                      preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                      <path fill="currentColor"
+                        d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
+                    </svg>
+                  </div>
+                </button>
+                <button class="button" type="submit">
+                  <p>Agregar</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                    preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
+                    <path fill="currentColor"
+                      d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
+                  </svg>
+                </button>
               </div>
 
             </div>
-
-            <div class="mb-1">
-              <label for="tareasEdit" class="form-label">tareasEdit
-              </label>
-              <input type="text" class="form-control" name="tareasEdit" value="tareasEdit" id="tareasEdit"
-                aria-describedby="tareasEdit" [(ngModel)]="tareas">
-            </div>
-
-
-            <div class="expEdit">
-              <div class="mb-1">
-                <label for="empresaEdit" class="form-label">empresaEdit
-                </label>
-                <input type="text" class="form-control" name="empresaEdit" value="empresaEdit" id="empresaEdit"
-                  aria-describedby="empresaEdit" [(ngModel)]="empresa">
-              </div>
-            </div>
-
-            <div class="btnsEdit">
-              <div (click)="cancelar()">
-                <p>Cancelar</p>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                  <path fill="currentColor"
-                    d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
-                </svg>
-              </div>
-              <div (click)="add()" ng-click="$event.preventDefault()" type="submit" value="add" >
-                <p>Agregar</p>
-                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                  preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
-                  <path fill="currentColor"
-                    d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
-                </svg>
-              </div>
-            </div>
-
           </div>
-        </div>
+        </form>
       </div>
     </ng-template>
 

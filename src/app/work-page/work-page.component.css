@@ -138,6 +138,20 @@
       margin-left: 10px;
     }
 
+    .error p{
+      color: tomato;
+      margin-top: 10px;
+    }
+    .button{
+      display: flex;
+      background: transparent;
+      color: whitesmoke;
+      border: none;
+    }
+    .input-group-sm{
+      margin-top:0.5rem ;
+    }
+
   @media screen and (max-width: 990px) {
  
     .about {

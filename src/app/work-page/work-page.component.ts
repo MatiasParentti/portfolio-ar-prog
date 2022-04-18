@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { workss } from '../works/workss.component';
 import { ServDataService } from '../serv-data.service';
 import { ServDeleteService } from '../serv-delete.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-work-page',
@@ -11,28 +13,100 @@ import { ServDeleteService } from '../serv-delete.service';
 })
 export class WorkPageComponent implements OnInit {
 
-  worksGet: any = this.myData.worksGet
+  // @Input() session!: boolean; 
+  session = true;
 
-  // @Input() session!: boolean;
+  form: FormGroup;
 
-  session = false;
+  worksGet: workss[] = []
+  workEdit: any;
+
   newWork = false;
   editWork = false;
+
   ids: number = 0;
-  index: any;
- 
+  id: number = 0;
+  imageEdit: string = '';
 
-  id: number = 0
-  name: string = ' '
-  liveCode: string = ' '
-  source: string = ' '
-  image: string = ' '
-  info: string = ' '
-  stack: string = ' '
+  get Name() {
+    return this.form.get("name");
+  }
 
-  
+  get Info() {
+    return this.form.get("info");
+  }
 
+  get Stack() {
+    return this.form.get("stack");
+  }
 
+  get Image() {
+    return this.form.get("image");
+  }
+
+  get LiveCode() {
+    return this.form.get("liveCode");
+  }
+
+  get Source() {
+    return this.form.get("source");
+  }
+
+  get NameValid() {
+    return this.Name?.touched && !this.Name?.valid;
+  }
+
+  get InfoValid() {
+    return this.Info?.touched && !this.Info?.valid;
+  }
+
+  get StackValid() {
+    return this.Stack?.touched && !this.Stack?.valid;
+  }
+
+  get LiveCodeValid() {
+    return this.LiveCode?.touched && !this.LiveCode?.valid;
+  }
+
+  get ImageValid() {
+    return this.Image?.touched && !this.Image?.valid;
+  }
+
+  get SourceValid() {
+    return this.Source?.touched && !this.Source?.valid;
+  }
+
+  onEnviar(event: Event) {
+    event.preventDefault;
+    if (this.form.valid) {
+      let values = this.form.value
+      const add = new workss(this.worksGet.length + 1, values.name, values.liveCode, values.source, values.image, values.info, values.stack)
+      this.myData.pushNewWork(add)
+      alert("Nueva Work Agregada")
+      this.newWork = false;
+      this.form.reset();
+    } else {
+      this.form.markAllAsTouched();
+      console.log('error')
+    }
+
+  }
+  onEdit(event: Event) {
+    event.preventDefault;
+    if (this.form.valid) {
+      let values = this.form.value
+      const add = new workss(this.worksGet.length + 1, values.name, values.liveCode, values.source, values.image, values.info, values.stack)
+      this.myData.actualizarWork(this.ids, add)
+      alert("work editada")
+      this.newWork = false;
+      this.editWork = false;
+      this.form.reset();
+    } else {
+      this.form.markAllAsTouched();
+      console.log('error')
+    }
+
+  }
   btnNewWork() {
     if (this.newWork == false) {
       this.newWork = true
@@ -40,38 +114,19 @@ export class WorkPageComponent implements OnInit {
       this.newWork = false
     }
   }
-  clear() {
-    this.id = 0,
-      this.name = ' ',
-      this.liveCode = ' ',
-      this.source = ' ',
-      this.image = ' ',
-      this.info = ' ',
-      this.stack = ' '
-  }
-
-  add() {
-    const add = new workss(this.worksGet.length + 1, this.name, this.liveCode, this.source, this.image, this.info, this.stack)
-    this.myData.pushNewWork(add)
-    this.clear()
-    this.newWork = false;
-    return false;
-  }
-  
-
-
   edits(id: number) {
 
     this.editWork = true;
     this.ids = id
-    this.index = this.myData.editWork(id)
-    this.name = this.index.name
-    this.liveCode = this.index.liveCode
-    this.source = this.index.source
-    this.image = this.index.image
-    this.stack = this.index.stack
-    this.info = this.index.info
-    this.id = this.index.id
+    this.workEdit = this.myData.editWork(id)
+    this.form.controls['name'].patchValue(this.workEdit.name)
+    this.form.controls['liveCode'].patchValue(this.workEdit.liveCode)
+    this.form.controls['source'].patchValue(this.workEdit.source)
+    this.form.controls['image'].patchValue(this.workEdit.image)
+    this.form.controls['stack'].patchValue(this.workEdit.stack)
+    this.form.controls['info'].patchValue(this.workEdit.info)
+    this.id = this.workEdit.id
+    this.imageEdit = this.workEdit.image
 
   }
   delete(id: number, name: string) {
@@ -80,21 +135,13 @@ export class WorkPageComponent implements OnInit {
       this.myData.deleteWork(id)
     }
     this.editWork = false;
-    this.clear();
+    this.form.reset();
     return false
   }
-
   cancelar() {
     this.editWork = false;
     this.newWork = false
-    this.clear()
-  }
-
-  confirmar() {
-    const editThis = new workss(this.id, this.name, this.liveCode, this.source, this.image, this.info, this.stack)
-    this.myData.actualizarWork(this.ids, editThis)
-    this.editWork = false;
-    this.clear()
+    this.form.reset();
   }
   volver() {
     this.router.navigate([''])
@@ -102,9 +149,33 @@ export class WorkPageComponent implements OnInit {
 
 
 
-  constructor(private router: Router, private myData: ServDataService, private myService: ServDeleteService) { }
+  constructor(private router: Router, private myData: ServDataService, private myService: ServDeleteService, private formBuilder: FormBuilder) {
+
+    this.form = this.formBuilder.group({
+
+      name: ['', [Validators.required]],
+      info: ['', [Validators.required]],
+      stack: ['', [Validators.required]],
+      image: ['', [Validators.required]],
+      liveCode: ['', [Validators.required]],
+      source: ['', [Validators.required]],
+
+    })
+
+
+
+  }
 
   ngOnInit(): void {
+
+    this.myData.getWorks().subscribe(myWork => {
+
+      this.worksGet = Object.values(myWork)
+
+      this.myData.setWorks(this.worksGet)
+
+    });
+
   }
 
 }

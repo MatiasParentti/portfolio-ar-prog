@@ -39,7 +39,7 @@
               <div class="card-body">
                 <div class="headerEdit">
                   <h5 class="card-title">{{work.name}}</h5>
-                  <div *ngIf="session"type="button" class="editCont" (click)="edits(indexOfelement)">
+                  <div *ngIf="session" type="button" class="editCont" (click)="edits(indexOfelement)">
                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
                       preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                       <path fill="currentColor"
@@ -75,41 +75,101 @@
       </div>
     </div>
 
-
     <ng-template #edit>
-
-      <div class="card mb-3">
-        <Form>
+      <div  class="card mb-3">
+    
+        <form [formGroup]="form" (ngSubmit)="onEdit($event)">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="{{image}}" class="img-fluid rounded-start" alt="...">
+              <img src="{{imageEdit}}" class="img-fluid rounded-start" alt="image">
+
               <div class="mb-1 input-group-sm">
-                <label for="image" class="form-label">image</label>
-                <input type="text" class="form-control" name="stack" value="image" id="image" aria-describedby="image"
-                  [(ngModel)]="image">
+                <label for="newImage" class="form-label">image</label>
+                <input type="text" class="form-control" id="newImage" aria-describedby="newImage"
+                  placeholder="url imagen" formControlName="image"
+                  [ngStyle]="{'border-color':(Image?.errors &&Image?.touched) ? 'tomato' : '#736b5e', 'color':(Image?.errors && Image?.touched) ? 'tomato' : 'whitesmoke' }">
+                <div class="error" *ngIf="Image?.errors  && Image?.touched">
+                  <p *ngIf="Image?.hasError('required')" class="error mt-1">
+                    Image es requerido.
+                  </p>
+                  <p *ngIf="Image?.errors?.['minlength']" class="error mt-1">
+                    El User debe ser de 5 o más caracteres.
+                  </p>
+                  <p *ngIf="Image?.errors?.['maxlength']" class="error mt-1">
+                    El User debe ser menor a 12 caracteres.
+                  </p>
+                </div>
               </div>
+
               <div class="buttonsWork">
+
+
                 <div class="mb-1 input-group-sm">
-                  <label for="source" class="form-label">source</label>
-                  <input type="text" class="form-control" name="source" value="source" id="source"
-                    aria-describedby="source" [(ngModel)]="source">
+                  <label for="newSource" class="form-label">source</label>
+                  <input
+                    [ngStyle]="{'border-color':(Source?.errors && Source?.touched) ? 'tomato' : '#736b5e', 'color':(Source?.errors && Source?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newSource" aria-describedby="newSource"
+                    placeholder="url source" formControlName="source">
+                  <div class="error" *ngIf="Source?.errors  && Source?.touched">
+                    <p *ngIf="Source?.hasError('required')" class="error mt-1">
+                      Source es requerido.
+                    </p>
+                    <p *ngIf="Source?.errors?.['minlength']" class="error mt-1">
+                      Source debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Source?.errors?.['maxlength']" class="error mt-1">
+                      Source debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
                 </div>
+
                 <div class="mb-1 input-group-sm">
-                  <label for="liveCode" class="form-label">liveCode</label>
-                  <input type="text" class="form-control" name="liveCode" value="liveCode" id="liveCode"
-                    aria-describedby="liveCode" [(ngModel)]="liveCode">
+                  <label for="newLiveCode" class="form-label">liveCode</label>
+                  <input
+                    [ngStyle]="{'border-color':(LiveCode?.errors && LiveCode?.touched) ? 'tomato' : '#736b5e', 'color':(LiveCode?.errors && LiveCode?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newLiveCode" aria-describedby="newLiveCode"
+                    placeholder="url liveCode" formControlName="liveCode">
+                  <div class="error" *ngIf="LiveCode?.errors  && LiveCode?.touched">
+                    <p *ngIf="LiveCode?.hasError('required')" class="error mt-1">
+                      LiveCode es requerido.
+                    </p>
+                    <p *ngIf="LiveCode?.errors?.['minlength']" class="error mt-1">
+                      LiveCode debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="LiveCode?.errors?.['maxlength']" class="error mt-1">
+                      LiveCode debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
                 </div>
+
               </div>
             </div>
             <div class="col-md-8">
               <div class="card-body">
                 <div class="headerEdit">
+
+
+
                   <div class=" input-group-sm mb-1">
-                    <label for="name" class="form-label">name</label>
-                    <input type="text" class="form-control" name="name" value="name" id="name" aria-describedby="name"
-                      [(ngModel)]="name">
+                    <label for="newName" class="form-label">name</label>
+                    <input
+                      [ngStyle]="{'border-color':(Name?.errors &&Name?.touched) ? 'tomato' : '#736b5e', 'color':(Name?.errors && Name?.touched) ? 'tomato' : 'whitesmoke' }"
+                      type="text" class="form-control" id="newName" aria-describedby="newName" placeholder="name"
+                      formControlName="name">
+                    <div class="error" *ngIf="Name?.errors  && Name?.touched">
+                      <p *ngIf="Name?.hasError('required')" class="error mt-1">
+                        El Cargo es requerido.
+                      </p>
+                      <p *ngIf="Name?.errors?.['minlength']" class="error mt-1">
+                        El User debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="Name?.errors?.['maxlength']" class="error mt-1">
+                        El User debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+
                   </div>
-                  <div class="delete" (click)="delete(ids, name)">
+                  <div class="delete" (click)="delete(ids, '')">
                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
                       preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                       <path fill="currentcolor"
@@ -117,132 +177,246 @@
                     </svg>
                   </div>
                 </div>
-                <div class="mb-1 input-group-sm">
-                  <label for="stack" class="form-label">stack</label>
-                  <input type="text" class="form-control" name="stack" value="stack" id="stack" aria-describedby="stack"
-                    [(ngModel)]="stack">
-                </div>
-                <div class="mb-1">
-                  <label for="info" class="form-label">info</label>
-                  <div class="input-group">
 
-                    <textarea type="text" class="form-control" aria-label="info" name="info" value="info" id="info"
-                      [(ngModel)]="info"></textarea>
+
+                <div class="mb-1 input-group-sm">
+                  <label for="newStack" class="form-label">stack</label>
+                  <input
+                    [ngStyle]="{'border-color':(Stack?.errors &&Stack?.touched) ? 'tomato' : '#736b5e', 'color':(Stack?.errors && Stack?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newStack" aria-describedby="newStack" placeholder="stack"
+                    formControlName="stack">
+                  <div class="error" *ngIf="Stack?.errors  && Stack?.touched">
+                    <p *ngIf="Stack?.hasError('required')" class="error mt-1">
+                      El Stack es requerido.
+                    </p>
+                    <p *ngIf="Stack?.errors?.['minlength']" class="error mt-1">
+                      El Stack debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Stack?.errors?.['maxlength']" class="error mt-1">
+                      El Stack debe ser menor a 12 caracteres.
+                    </p>
                   </div>
                 </div>
+
+
+                <div class="mb-1">
+                  <label for="newInfo" class="form-label">info</label>
+
+                  <textarea
+                    [ngStyle]="{'border-color':(Info?.errors &&Info?.touched) ? 'tomato' : '#736b5e', 'color':(Info?.errors && Info?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" aria-label="newInfo" id="newInfo" placeholder="info"
+                    formControlName="info">
+                    </textarea>
+                  <div class="error" *ngIf="Info?.errors  && Info?.touched">
+                    <p *ngIf="Info?.hasError('required')" class="error mt-1">
+                      Info es requerido.
+                    </p>
+                    <p *ngIf="Info?.errors?.['minlength']" class="error mt-1">
+                      Info debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Info?.errors?.['maxlength']" class="error mt-1">
+                      Info debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
+
+                </div>
+
+
                 <div class="btnsEdit">
-                  <div (click)="cancelar()">
+                  <button class="button" (click)="cancelar()">
                     <p>Cancelar</p>
                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
                       preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                       <path fill="currentColor"
                         d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
                     </svg>
-                  </div>
-                  <div (click)="confirmar()">
+                  </button >
+                  <button class="button" type="submit">
                     <p>Guardar</p>
                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
                       preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
                       <path fill="currentColor"
                         d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
                     </svg>
-                  </div>
+                  </button >
                 </div>
+
+
               </div>
             </div>
           </div>
-        </Form>
+        </form>
       </div>
-
-
-
-
-
     </ng-template>
+
+
 
     <ng-template #newW>
 
       <div class="card mb-3">
-        <Form>
+        <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
           <div class="row g-0">
             <div class="col-md-4">
-              <img src="" class="img-fluid rounded-start" alt="image">
+              <img src="https://img.freepik.com/psd-gratis/maqueta-presentacion-sitio-web-aislado_359791-174.jpg?w=826&t=st=1649875760~exp=1649876360~hmac=f9cc4f30e3a4caa60eb9cf145a2e952d05531bd37f2f5e310c0e05d2f3eb9d1a" class="img-fluid rounded-start" alt="image">
+
               <div class="mb-1 input-group-sm">
-                <label for="image" class="form-label">image</label>
-                <input type="text" class="form-control" name="stack" value="image" id="image" aria-describedby="image"
-                  [(ngModel)]="image">
+                <label for="newImage" class="form-label">image</label>
+                <input type="text" class="form-control" id="newImage" aria-describedby="newImage"
+                  placeholder="url imagen" formControlName="image"
+                  [ngStyle]="{'border-color':(Image?.errors &&Image?.touched) ? 'tomato' : '#736b5e', 'color':(Image?.errors && Image?.touched) ? 'tomato' : 'whitesmoke' }">
+                <div class="error" *ngIf="Image?.errors  && Image?.touched">
+                  <p *ngIf="Image?.hasError('required')" class="error mt-1">
+                    Image es requerido.
+                  </p>
+                  <p *ngIf="Image?.errors?.['minlength']" class="error mt-1">
+                    El User debe ser de 5 o más caracteres.
+                  </p>
+                  <p *ngIf="Image?.errors?.['maxlength']" class="error mt-1">
+                    El User debe ser menor a 12 caracteres.
+                  </p>
+                </div>
               </div>
+
               <div class="buttonsWork">
+
+
                 <div class="mb-1 input-group-sm">
-                  <label for="source" class="form-label">source</label>
-                  <input type="text" class="form-control" name="source" value="source" id="source"
-                    aria-describedby="source" [(ngModel)]="source">
+                  <label for="newSource" class="form-label">source</label>
+                  <input
+                    [ngStyle]="{'border-color':(Source?.errors && Source?.touched) ? 'tomato' : '#736b5e', 'color':(Source?.errors && Source?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newSource" aria-describedby="newSource"
+                    placeholder="url source" formControlName="source">
+                  <div class="error" *ngIf="Source?.errors  && Source?.touched">
+                    <p *ngIf="Source?.hasError('required')" class="error mt-1">
+                      Source es requerido.
+                    </p>
+                    <p *ngIf="Source?.errors?.['minlength']" class="error mt-1">
+                      Source debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Source?.errors?.['maxlength']" class="error mt-1">
+                      Source debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
                 </div>
+
                 <div class="mb-1 input-group-sm">
-                  <label for="liveCode" class="form-label">liveCode</label>
-                  <input type="text" class="form-control" name="liveCode" value="liveCode" id="liveCode"
-                    aria-describedby="liveCode" [(ngModel)]="liveCode">
+                  <label for="newLiveCode" class="form-label">liveCode</label>
+                  <input
+                    [ngStyle]="{'border-color':(LiveCode?.errors && LiveCode?.touched) ? 'tomato' : '#736b5e', 'color':(LiveCode?.errors && LiveCode?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newLiveCode" aria-describedby="newLiveCode"
+                    placeholder="url liveCode" formControlName="liveCode">
+                  <div class="error" *ngIf="LiveCode?.errors  && LiveCode?.touched">
+                    <p *ngIf="LiveCode?.hasError('required')" class="error mt-1">
+                      LiveCode es requerido.
+                    </p>
+                    <p *ngIf="LiveCode?.errors?.['minlength']" class="error mt-1">
+                      LiveCode debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="LiveCode?.errors?.['maxlength']" class="error mt-1">
+                      LiveCode debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
                 </div>
+
               </div>
             </div>
             <div class="col-md-8">
               <div class="card-body">
                 <div class="headerEdit">
+
+
+
                   <div class=" input-group-sm mb-1">
-                    <label for="name" class="form-label">name</label>
-                    <input type="text" class="form-control" name="name" value="name" id="name" aria-describedby="name"
-                      [(ngModel)]="name">
+                    <label for="newName" class="form-label">name</label>
+                    <input
+                      [ngStyle]="{'border-color':(Name?.errors &&Name?.touched) ? 'tomato' : '#736b5e', 'color':(Name?.errors && Name?.touched) ? 'tomato' : 'whitesmoke' }"
+                      type="text" class="form-control" id="newName" aria-describedby="newName" placeholder="name"
+                      formControlName="name">
+                    <div class="error" *ngIf="Name?.errors  && Name?.touched">
+                      <p *ngIf="Name?.hasError('required')" class="error mt-1">
+                        El Cargo es requerido.
+                      </p>
+                      <p *ngIf="Name?.errors?.['minlength']" class="error mt-1">
+                        El User debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="Name?.errors?.['maxlength']" class="error mt-1">
+                        El User debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+
                   </div>
 
                 </div>
+
+
                 <div class="mb-1 input-group-sm">
-                  <label for="stack" class="form-label">stack</label>
-                  <input type="text" class="form-control" name="stack" value="stack" id="stack" aria-describedby="stack"
-                    [(ngModel)]="stack">
-                </div>
-                <div class="mb-1">
-                  <label for="info" class="form-label">info</label>
-                  <div class="input-group">
-
-                    <textarea type="text" class="form-control" aria-label="info" name="info" value="info" id="info"
-                      [(ngModel)]="info"></textarea>
+                  <label for="newStack" class="form-label">stack</label>
+                  <input
+                    [ngStyle]="{'border-color':(Stack?.errors &&Stack?.touched) ? 'tomato' : '#736b5e', 'color':(Stack?.errors && Stack?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newStack" aria-describedby="newStack" placeholder="stack"
+                    formControlName="stack">
+                  <div class="error" *ngIf="Stack?.errors  && Stack?.touched">
+                    <p *ngIf="Stack?.hasError('required')" class="error mt-1">
+                      El Stack es requerido.
+                    </p>
+                    <p *ngIf="Stack?.errors?.['minlength']" class="error mt-1">
+                      El Stack debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Stack?.errors?.['maxlength']" class="error mt-1">
+                      El Stack debe ser menor a 12 caracteres.
+                    </p>
                   </div>
                 </div>
-                <div class="btnsEdit">
-                  <a>
-                    <div (click)="cancelar()">
 
+
+                <div class="mb-1">
+                  <label for="newInfo" class="form-label">info</label>
+
+                  <textarea
+                    [ngStyle]="{'border-color':(Info?.errors &&Info?.touched) ? 'tomato' : '#736b5e', 'color':(Info?.errors && Info?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" aria-label="newInfo" id="newInfo" placeholder="info"
+                    formControlName="info">
+                    </textarea>
+                  <div class="error" *ngIf="Info?.errors  && Info?.touched">
+                    <p *ngIf="Info?.hasError('required')" class="error mt-1">
+                      Info es requerido.
+                    </p>
+                    <p *ngIf="Info?.errors?.['minlength']" class="error mt-1">
+                      Info debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Info?.errors?.['maxlength']" class="error mt-1">
+                      Info debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
+
+                </div>
+
+
+                <div class="btnsEdit">
+                  <button class="button" type="submit">
+                    <div (click)="cancelar()">
                       <p>Cancelar</p>
                       <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
                         preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
                         <path fill="currentColor"
                           d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
                       </svg>
-
                     </div>
-                  </a>
-                  <a>
-                    <div (click)="add()">
-
-                      <p>Agregar</p>
-                      <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
-                        preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
-                        <path fill="currentColor"
-                          d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
-                      </svg>
-
-
-                    </div>
-                  </a>
+                  </button>
+                  <button class="button" type="submit">
+                    <p>Agregar</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                      preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
+                      <path fill="currentColor"
+                        d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        </Form>
+        </form>
       </div>
-
-
-
 
 
     </ng-template>
@@ -255,7 +429,7 @@
         <path fill="whitesmoke"
           d="m272.9 512l265.4-339.1c4.1-5.2.4-12.9-6.3-12.9h-77.3c-4.9 0-9.6 2.3-12.6 6.1L186.8 492.3a31.99 31.99 0 0 0 0 39.5l255.3 326.1c3 3.9 7.7 6.1 12.6 6.1H532c6.7 0 10.4-7.7 6.3-12.9L272.9 512zm304 0l265.4-339.1c4.1-5.2.4-12.9-6.3-12.9h-77.3c-4.9 0-9.6 2.3-12.6 6.1L490.8 492.3a31.99 31.99 0 0 0 0 39.5l255.3 326.1c3 3.9 7.7 6.1 12.6 6.1H836c6.7 0 10.4-7.7 6.3-12.9L576.9 512z" />
       </svg>
-   
+
     </a>
 
 

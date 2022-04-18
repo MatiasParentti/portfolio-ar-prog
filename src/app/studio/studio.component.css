@@ -70,7 +70,16 @@ svg{
   .btnsEdit div{
     display: flex;}
     
-
+.error p{
+  color: tomato;
+  margin-top: 10px;
+}
+button{
+  display: flex;
+  background: transparent;
+  color: whitesmoke;
+  border: none;
+}
 
    /* Responsive Styles */
 @media screen and (max-width: 990px) {

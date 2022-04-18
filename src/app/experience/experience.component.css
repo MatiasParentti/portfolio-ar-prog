@@ -86,6 +86,16 @@
     
   }
 
+  .inputs p{
+    color: tomato;
+  }
+  .button{
+    display: flex;
+    background: transparent;
+    color: whitesmoke;
+    border: none;
+  }
+
 
   /* Responsive Styles */
 @media screen and (max-width: 990px) {

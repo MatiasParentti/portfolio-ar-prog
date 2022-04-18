@@ -2,6 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ServDeleteService } from '../serv-delete.service';
 import { experiences } from './experiences.component';
 import { ServDataService } from '../serv-data.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
+
+
 
 @Component({
   selector: 'app-experience',
@@ -14,29 +18,49 @@ export class ExperienceComponent implements OnInit {
 
   @Input() session!: boolean;
 
-  experiencesGet: any
+  form: FormGroup;
 
-  index: any;
+  experiencesGet: experiences[] = [];
+  experienceEdit: any;
 
   ids: number = 0;
-
   id: number = 0
-  empresa: string = ' '
-  fecha: string = ' '
-  tareas: string = ' '
-  cargo: string = ' '
-
-  idEdit: number = 0
-  empresaEdit: string = ''
-  fechaEdit: string = ' '
-  tareasEdit: string = ' '
-  cargoEdit: string = ' '
-
 
   newExp = false;
   editExp = false;
 
 
+  get Cargo() {
+    return this.form.get("cargo");
+  }
+
+  get Fecha() {
+    return this.form.get("fecha");
+  }
+
+  get Empresa() {
+    return this.form.get("empresa");
+  }
+
+  get Tareas() {
+    return this.form.get("tareas");
+  }
+
+  get CargoValid() {
+    return this.Cargo?.touched && !this.Cargo?.valid;
+  }
+
+  get EmpresaValid() {
+    return this.Empresa?.touched && !this.Empresa?.valid;
+  }
+
+  get TareasValid() {
+    return this.Tareas?.touched && !this.Tareas?.valid;
+  }
+
+  get FechaValid() {
+    return this.Fecha?.touched && !this.Fecha?.valid;
+  }
 
   btnNewExp() {
     if (this.newExp == false) {
@@ -46,75 +70,89 @@ export class ExperienceComponent implements OnInit {
     }
   }
 
-  edits(id: number) {
-    this.editExp = true;
-    this.ids = id
-    this.index = this.myData.editExp(id)
-    this.empresa = this.index.empresa
-    this.fecha = this.index.fecha
-    this.tareas = this.index.tareas
-    this.cargo = this.index.cargo
-    this.id = this.index.id
-  }
-
-
-
   cancelar() {
     this.editExp = false;
     this.newExp = false;
-    this.clear()
-  }
-  confirmar() {
-    const editThis = new experiences(this.id, this.empresa, this.fecha, this.tareas, this.cargo)
-    this.myData.actualizarExp(this.ids, editThis)
-    this.editExp = false;
-    this.clear()
+    this.form.reset();
   }
 
-  clear() {
-    this.id = 0,
-      this.empresa = ' ',
-      this.fecha = ' ',
-      this.tareas = ' ',
-      this.cargo = ' '
+  onEnviar(event: Event) {
+    event.preventDefault;
+    if (this.form.valid) {
+      let values = this.form.value
+      const add = new experiences(this.experiencesGet.length + 1, values.empresa, values.fecha, values.tareas, values.cargo)
+      this.myData.pushNewExp(add)
+      this.newExp = false;
+      this.editExp = false;
+      alert("Nueva Experiencia Agregada")
+      this.form.reset();
+    } else {
+      this.form.markAllAsTouched();
+      console.log('error')
+    }
+
   }
+
+  onEdit(event: Event) {
+    event.preventDefault;
+    if (this.form.valid) {
+      let values = this.form.value
+      const add = new experiences(this.experiencesGet.length + 1, values.empresa, values.fecha, values.tareas, values.cargo)
+      this.myData.actualizarExp(this.ids, add)
+      alert("Experiencia editada")
+      this.newExp = false;
+      this.editExp = false;
+      this.form.reset();
+    } else {
+      this.form.markAllAsTouched();
+      console.log('error')
+    }
+
+  }
+
+
 
   delete(id: number, cargo: string, empresa: string) {
     const resp = this.myService.msjAlert('eliminar  ' + cargo + ' ' + empresa + '?')
     if (resp) {
-      this.experiencesGet.splice(id, 1)
+      this.myData.deleteExp(id)
     }
     return false
   }
 
-  add() {
-
-    const add = new experiences(this.experiencesGet.length + 1, this.empresa, this.fecha, this.tareas, this.cargo)
-    this.myData.pushNewExp(add)
-    this.clear()
-    this.newExp = false;
-    this.editExp = false;
-    return false;
-
+  edits(id: number) {
+    this.editExp = true;
+    this.ids = id;
+    this.experienceEdit = this.myData.editExp(id)
+    this.form.controls['cargo'].patchValue(this.experienceEdit.cargo)
+    this.form.controls['fecha'].patchValue(this.experienceEdit.fecha)
+    this.form.controls['tareas'].patchValue(this.experienceEdit.tareas)
+    this.form.controls['empresa'].patchValue(this.experienceEdit.empresa)
+    this.id = this.experienceEdit.id
   }
 
-  constructor(private myService: ServDeleteService, private myData: ServDataService) {
+  constructor(private myService: ServDeleteService, private myData: ServDataService, private formBuilder: FormBuilder) {
 
+    this.form = this.formBuilder.group({
+
+      cargo: ['', [Validators.required]],
+      fecha: ['', [Validators.required, Validators.maxLength(9), Validators.minLength(9)]],
+      tareas: ['', [Validators.required]],
+      empresa: ['', [Validators.required]],
+
+    })
 
   }
 
   ngOnInit(): void {
 
-
     this.myData.getExperiences().subscribe(myExp => {
 
-      this.experiencesGet = myExp
-      
+      this.experiencesGet = Object.values(myExp)
+
+      this.myData.setExperience(this.experiencesGet)
+
     });
-
-
-    this.experiencesGet = this.myData.experiencesGet
-
 
   }
 
