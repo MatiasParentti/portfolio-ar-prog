@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ServDataService } from '../serv-data.service';
 import { Router } from '@angular/router';
+import { workss } from '../works/workss.component';
 
 @Component({
   selector: 'app-works',
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class WorksComponent implements OnInit {
 
-  worksGet: any
+  worksGet: workss[] = []
 
   @Input() session!: boolean;
 
@@ -26,10 +27,11 @@ export class WorksComponent implements OnInit {
 
     this.myData.getWorks().subscribe(myWork => {
 
-      this.worksGet = myWork
+      this.worksGet = Object.values(myWork)
+
+      this.myData.setWorks(this.worksGet)
 
     });
 
   }
-
 }
