@@ -1,0 +1,433 @@
+<div class="container">
+  <div class="about">
+
+    <div class="headerEdit">
+      <div class="titleSection">
+        <h4>Proyectos</h4><img
+          src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='%23e6770b' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='7' r='4' /%3e%3cpath d='M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2' /%3e%3c/svg%3e"
+          alt="">
+      </div>
+      <div *ngIf="isAdmin && !editWork" type="button" class="editCont" (click)="btnNewWork()">
+        <img
+          src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9' /%3e%3cline x1='9' y1='12' x2='15' y2='12' /%3e%3cline x1='12' y1='9' x2='12' y2='15' /%3e%3c/svg%3e"
+          alt="">
+      </div>
+    </div>
+    <div class="entry"></div>
+    <div *ngIf="!newWork; else newW">
+      <div *ngIf="!editWork; else edit">
+        <div class="card mb-3" *ngFor="let work of getWork ;let indexOfelement=index;">
+
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="{{work.image}}" class="img-fluid rounded-start" alt="...">
+              <div class="buttonsWork">
+
+                <button class="btnWork">
+                  <a href="{{work.liveCode}}" target="_blank">Live server</a>
+                  <span class="btnSpan"></span>
+                </button>
+                <div class="btnGit">
+                  <a href="{{ work.source }}" class="btnGit">Repo
+                    <img
+                      src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3cpath d='M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5' /%3e%3c/svg%3e"
+                      alt=""></a>
+                </div>
+
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <div class="headerEdit">
+                  <h5 class="card-title">{{work.name}}</h5>
+                  <div *ngIf="isAdmin" type="button" class="editCont" (click)="edits(work.id)">
+                    <img
+                      src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3cpath d='M9 7h-3a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-3' /%3e%3cpath d='M9 15h3l8.5 -8.5a1.5 1.5 0 0 0 -3 -3l-8.5 8.5v3' /%3e%3cline x1='16' y1='5' x2='19' y2='8' /%3e%3c/svg%3e"
+                      alt="">
+                  </div>
+                </div>
+
+                <p class="card-text mt-1"><small>{{work.stack}}</small></p>
+                <p class="btnDown">
+                  <a class="mt-1" data-bs-toggle="collapse" href='#this' role="button" aria-expanded="false"
+                    aria-controls="collapseExample">
+                    <img
+                      src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='%2352d053' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9' /%3e%3cline x1='8' y1='12' x2='12' y2='16' /%3e%3cline x1='12' y1='8' x2='12' y2='16' /%3e%3cline x1='16' y1='12' x2='12' y2='16' /%3e%3c/svg%3e"
+                      alt="">
+                  </a>
+                  descripcion
+
+                </p>
+                <div class="collapse" id="this">
+                  <div class="card-body">
+                    {{work.info}}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #edit>
+      <div class="card mb-3">
+
+        <form [formGroup]="form" (ngSubmit)="onEdit($event)">
+          <div class="row g-0">
+            <div class="col-md-4">
+              
+              <div class="delete" (click)="delete(ids, '')">
+                <img
+                  src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3cline x1='4' y1='7' x2='20' y2='7' /%3e%3cline x1='10' y1='11' x2='10' y2='17' /%3e%3cline x1='14' y1='11' x2='14' y2='17' /%3e%3cpath d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12' /%3e%3cpath d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3' /%3e%3c/svg%3e"
+                  alt="">
+              </div>
+              <div class="mb-1 input-group-sm">
+                <label for="newImage" class="form-label">image</label>
+                <input type="text" class="form-control" id="newImage" aria-describedby="newImage"
+                  placeholder="url imagen" formControlName="image"
+                  [ngStyle]="{'border-color':(Image?.errors &&Image?.touched) ? 'tomato' : '#736b5e', 'color':(Image?.errors && Image?.touched) ? 'tomato' : 'whitesmoke' }">
+                <div class="error" *ngIf="Image?.errors  && Image?.touched">
+                  <p *ngIf="Image?.hasError('required')" class="error mt-1">
+                    Image es requerido.
+                  </p>
+                  <p *ngIf="Image?.errors?.['minlength']" class="error mt-1">
+                    El User debe ser de 5 o más caracteres.
+                  </p>
+                  <p *ngIf="Image?.errors?.['maxlength']" class="error mt-1">
+                    El User debe ser menor a 12 caracteres.
+                  </p>
+                </div>
+              </div>
+
+              <div class="buttonsWork">
+
+
+                <div>
+                  <div class="mb-1 input-group-sm">
+                    <label for="newSource" class="form-label">source</label>
+                    <input
+                      [ngStyle]="{'border-color':(Source?.errors && Source?.touched) ? 'tomato' : '#736b5e', 'color':(Source?.errors && Source?.touched) ? 'tomato' : 'whitesmoke' }"
+                      type="text" class="form-control" id="newSource" aria-describedby="newSource"
+                      placeholder="url source" formControlName="source">
+                    <div class="error" *ngIf="Source?.errors  && Source?.touched">
+                      <p *ngIf="Source?.hasError('required')" class="error mt-1">
+                        Source es requerido.
+                      </p>
+                      <p *ngIf="Source?.errors?.['minlength']" class="error mt-1">
+                        Source debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="Source?.errors?.['maxlength']" class="error mt-1">
+                        Source debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="mb-1 input-group-sm">
+                    <label for="newLiveCode" class="form-label">liveCode</label>
+                    <input
+                      [ngStyle]="{'border-color':(LiveCode?.errors && LiveCode?.touched) ? 'tomato' : '#736b5e', 'color':(LiveCode?.errors && LiveCode?.touched) ? 'tomato' : 'whitesmoke' }"
+                      type="text" class="form-control" id="newLiveCode" aria-describedby="newLiveCode"
+                      placeholder="url liveCode" formControlName="liveCode">
+                    <div class="error" *ngIf="LiveCode?.errors  && LiveCode?.touched">
+                      <p *ngIf="LiveCode?.hasError('required')" class="error mt-1">
+                        LiveCode es requerido.
+                      </p>
+                      <p *ngIf="LiveCode?.errors?.['minlength']" class="error mt-1">
+                        LiveCode debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="LiveCode?.errors?.['maxlength']" class="error mt-1">
+                        LiveCode debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <div class="headerEdit">
+
+
+
+                  <div class=" input-group-sm mb-1">
+                    <label for="newName" class="form-label">name</label>
+                    <input
+                      [ngStyle]="{'border-color':(Name?.errors &&Name?.touched) ? 'tomato' : '#736b5e', 'color':(Name?.errors && Name?.touched) ? 'tomato' : 'whitesmoke' }"
+                      type="text" class="form-control" id="newName" aria-describedby="newName" placeholder="name"
+                      formControlName="name">
+                    <div class="error" *ngIf="Name?.errors  && Name?.touched">
+                      <p *ngIf="Name?.hasError('required')" class="error mt-1">
+                        El Cargo es requerido.
+                      </p>
+                      <p *ngIf="Name?.errors?.['minlength']" class="error mt-1">
+                        El User debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="Name?.errors?.['maxlength']" class="error mt-1">
+                        El User debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+
+                  </div>
+                 
+                </div>
+
+
+                <div class="mb-1 input-group-sm">
+                  <label for="newStack" class="form-label">stack</label>
+                  <input
+                    [ngStyle]="{'border-color':(Stack?.errors &&Stack?.touched) ? 'tomato' : '#736b5e', 'color':(Stack?.errors && Stack?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newStack" aria-describedby="newStack" placeholder="stack"
+                    formControlName="stack">
+                  <div class="error" *ngIf="Stack?.errors  && Stack?.touched">
+                    <p *ngIf="Stack?.hasError('required')" class="error mt-1">
+                      El Stack es requerido.
+                    </p>
+                    <p *ngIf="Stack?.errors?.['minlength']" class="error mt-1">
+                      El Stack debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Stack?.errors?.['maxlength']" class="error mt-1">
+                      El Stack debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
+                </div>
+
+
+                <div class="mb-1">
+                  <label for="newInfo" class="form-label">info</label>
+
+                  <textarea
+                    [ngStyle]="{'border-color':(Info?.errors &&Info?.touched) ? 'tomato' : '#736b5e', 'color':(Info?.errors && Info?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" aria-label="newInfo" id="newInfo" placeholder="info"
+                    formControlName="info">
+                    </textarea>
+                  <div class="error" *ngIf="Info?.errors  && Info?.touched">
+                    <p *ngIf="Info?.hasError('required')" class="error mt-1">
+                      Info es requerido.
+                    </p>
+                    <p *ngIf="Info?.errors?.['minlength']" class="error mt-1">
+                      Info debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Info?.errors?.['maxlength']" class="error mt-1">
+                      Info debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
+
+                </div>
+
+
+                <div class="btnsEdit">
+                  <button class="button">
+                    <div (click)="cancelar()">
+                      <p>Cancelar</p>
+                      <img
+                        src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9' /%3e%3cpath d='M10 10l4 4m0 -4l-4 4' /%3e%3c/svg%3e"
+                        alt="">
+                    </div>
+                  </button>
+                  <button class="button" type="submit">
+                    <div>
+                      <p>Guardar</p>
+                      <img
+                        src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9' /%3e%3cpath d='M9 12l2 2l4 -4' /%3e%3c/svg%3e"
+                        alt="">
+                    </div>
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+
+
+
+    <ng-template #newW>
+
+      <div class="card mb-3">
+        <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img
+                src="https://img.freepik.com/psd-gratis/maqueta-presentacion-sitio-web-aislado_359791-174.jpg?w=826&t=st=1649875760~exp=1649876360~hmac=f9cc4f30e3a4caa60eb9cf145a2e952d05531bd37f2f5e310c0e05d2f3eb9d1a"
+                class="img-fluid rounded-start" alt="image">
+
+              <div class="mb-1 input-group-sm">
+                <label for="newImage" class="form-label">image</label>
+                <input type="text" class="form-control" id="newImage" aria-describedby="newImage"
+                  placeholder="url imagen" formControlName="image"
+                  [ngStyle]="{'border-color':(Image?.errors &&Image?.touched) ? 'tomato' : '#736b5e', 'color':(Image?.errors && Image?.touched) ? 'tomato' : 'whitesmoke' }">
+                <div class="error" *ngIf="Image?.errors  && Image?.touched">
+                  <p *ngIf="Image?.hasError('required')" class="error mt-1">
+                    Image es requerido.
+                  </p>
+                  <p *ngIf="Image?.errors?.['minlength']" class="error mt-1">
+                    El User debe ser de 5 o más caracteres.
+                  </p>
+                  <p *ngIf="Image?.errors?.['maxlength']" class="error mt-1">
+                    El User debe ser menor a 12 caracteres.
+                  </p>
+                </div>
+              </div>
+
+              <div class="buttonsWork">
+
+                <div>
+                  <div class="mb-1 input-group-sm">
+                    <label for="newSource" class="form-label">source</label>
+                    <input
+                      [ngStyle]="{'border-color':(Source?.errors && Source?.touched) ? 'tomato' : '#736b5e', 'color':(Source?.errors && Source?.touched) ? 'tomato' : 'whitesmoke' }"
+                      type="text" class="form-control" id="newSource" aria-describedby="newSource"
+                      placeholder="url source" formControlName="source">
+                    <div class="error" *ngIf="Source?.errors  && Source?.touched">
+                      <p *ngIf="Source?.hasError('required')" class="error mt-1">
+                        Source es requerido.
+                      </p>
+                      <p *ngIf="Source?.errors?.['minlength']" class="error mt-1">
+                        Source debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="Source?.errors?.['maxlength']" class="error mt-1">
+                        Source debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="mb-1 input-group-sm">
+                    <label for="newLiveCode" class="form-label">liveCode</label>
+                    <input
+                      [ngStyle]="{'border-color':(LiveCode?.errors && LiveCode?.touched) ? 'tomato' : '#736b5e', 'color':(LiveCode?.errors && LiveCode?.touched) ? 'tomato' : 'whitesmoke' }"
+                      type="text" class="form-control" id="newLiveCode" aria-describedby="newLiveCode"
+                      placeholder="url liveCode" formControlName="liveCode">
+                    <div class="error" *ngIf="LiveCode?.errors  && LiveCode?.touched">
+                      <p *ngIf="LiveCode?.hasError('required')" class="error mt-1">
+                        LiveCode es requerido.
+                      </p>
+                      <p *ngIf="LiveCode?.errors?.['minlength']" class="error mt-1">
+                        LiveCode debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="LiveCode?.errors?.['maxlength']" class="error mt-1">
+                        LiveCode debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <div class="headerEdit">
+
+
+
+                  <div class=" input-group-sm mb-1">
+                    <label for="newName" class="form-label">name</label>
+                    <input
+                      [ngStyle]="{'border-color':(Name?.errors &&Name?.touched) ? 'tomato' : '#736b5e', 'color':(Name?.errors && Name?.touched) ? 'tomato' : 'whitesmoke' }"
+                      type="text" class="form-control" id="newName" aria-describedby="newName" placeholder="name"
+                      formControlName="name">
+                    <div class="error" *ngIf="Name?.errors  && Name?.touched">
+                      <p *ngIf="Name?.hasError('required')" class="error mt-1">
+                        El Cargo es requerido.
+                      </p>
+                      <p *ngIf="Name?.errors?.['minlength']" class="error mt-1">
+                        El User debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="Name?.errors?.['maxlength']" class="error mt-1">
+                        El User debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <div class="mb-1 input-group-sm">
+                  <label for="newStack" class="form-label">stack</label>
+                  <input
+                    [ngStyle]="{'border-color':(Stack?.errors &&Stack?.touched) ? 'tomato' : '#736b5e', 'color':(Stack?.errors && Stack?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" id="newStack" aria-describedby="newStack" placeholder="stack"
+                    formControlName="stack">
+                  <div class="error" *ngIf="Stack?.errors  && Stack?.touched">
+                    <p *ngIf="Stack?.hasError('required')" class="error mt-1">
+                      El Stack es requerido.
+                    </p>
+                    <p *ngIf="Stack?.errors?.['minlength']" class="error mt-1">
+                      El Stack debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Stack?.errors?.['maxlength']" class="error mt-1">
+                      El Stack debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
+                </div>
+
+
+                <div class="mb-1">
+                  <label for="newInfo" class="form-label">info</label>
+
+                  <textarea
+                    [ngStyle]="{'border-color':(Info?.errors &&Info?.touched) ? 'tomato' : '#736b5e', 'color':(Info?.errors && Info?.touched) ? 'tomato' : 'whitesmoke' }"
+                    type="text" class="form-control" aria-label="newInfo" id="newInfo" placeholder="info"
+                    formControlName="info">
+                    </textarea>
+                  <div class="error" *ngIf="Info?.errors  && Info?.touched">
+                    <p *ngIf="Info?.hasError('required')" class="error mt-1">
+                      Info es requerido.
+                    </p>
+                    <p *ngIf="Info?.errors?.['minlength']" class="error mt-1">
+                      Info debe ser de 5 o más caracteres.
+                    </p>
+                    <p *ngIf="Info?.errors?.['maxlength']" class="error mt-1">
+                      Info debe ser menor a 12 caracteres.
+                    </p>
+                  </div>
+
+                </div>
+
+
+                <div class="btnsEdit">
+                  <button class="button">
+                    <div (click)="cancelar()">
+                      <p>Cancelar</p>
+                      <img
+                        src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9' /%3e%3cpath d='M10 10l4 4m0 -4l-4 4' /%3e%3c/svg%3e"
+                        alt="">
+                    </div>
+                  </button>
+                  <button class="button" type="submit">
+                    <div>
+                      <p>Guardar</p>
+                      <img
+                        src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9' /%3e%3cpath d='M9 12l2 2l4 -4' /%3e%3c/svg%3e"
+                        alt="">
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+
+
+    </ng-template>
+
+
+
+    <a class="btnDown" routerLink="/">
+      <img
+        src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3cpolyline points='11 7 6 12 11 17' /%3e%3cpolyline points='17 7 12 12 17 17' /%3e%3c/svg%3e"
+        alt="">
+    </a>
+
+
+
+
+  </div>
+</div>

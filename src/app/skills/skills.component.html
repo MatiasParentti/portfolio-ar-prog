@@ -1,0 +1,207 @@
+<div class="skills">
+  <div class="about">
+
+    <div class="headerEdit">
+    
+      <div class="titleSection"><h4>Skills</h4><img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='%23e6770b' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3cpolyline points='12 4 4 8 12 12 20 8 12 4' /%3e%3cpolyline points='4 12 12 16 20 12' /%3e%3cpolyline points='4 16 12 20 20 16' /%3e%3c/svg%3e" alt=""></div>
+      <div *ngIf="isAdmin">
+        <div *ngIf="!editSkill" type="button" class="editCont" (click)="btnNewExp()">
+        <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9' /%3e%3cline x1='9' y1='12' x2='15' y2='12' /%3e%3cline x1='12' y1='9' x2='12' y2='15' /%3e%3c/svg%3e" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="entry"></div>
+    <div *ngIf="!editSkill; else edit">
+      <div *ngIf="!newSkill; else new">
+        <div class="row skills">
+          <div class="col-6 col-md-4 col-lg-3" *ngFor="let svg of getSkill ;let indexOfelement=index;">
+            <div class="card">
+
+              <div class="card-body">
+                <div class="delete mb-1" *ngIf="isAdmin" (click)="delete(svg.id, svg.nameSkill)">
+                <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3cline x1='4' y1='7' x2='20' y2='7' /%3e%3cline x1='10' y1='11' x2='10' y2='17' /%3e%3cline x1='14' y1='11' x2='14' y2='17' /%3e%3cpath d='M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12' /%3e%3cpath d='M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3' /%3e%3c/svg%3e" alt="">
+
+                </div>
+                <img src="{{svg.urlSvg}}" alt="{{svg.nameSkill}}">
+                <p class="skillsName">{{svg.nameSkill}}</p>
+                <div class="skillsBar"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #edit>
+      <div class="exp" id="newExperience">
+        <form [formGroup]="form">
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action target">
+              <div class="d-flex w-100 justify-content-between header">
+                <div class="head">
+                  <div>
+                  </div>
+
+                  <div class="mb-1 inputs">
+                    <label for="newNameSkill" class="form-label">NameSkill
+                    </label>
+                    <input
+                      [ngStyle]="{'border-color':(NameSkill?.errors && NameSkill?.touched) ? 'tomato' : '#736b5e', 'color':(NameSkill?.errors && NameSkill?.touched) ? 'tomato' : 'whitesmoke' }"
+                      type="text" class="form-control" id="newNameSkill" placeholder="NameSkill"
+                      formControlName="nameSkill" aria-describedby="newNameSkill">
+                    <div *ngIf="NameSkill?.errors  && NameSkill?.touched">
+                      <p *ngIf="NameSkill?.hasError('required')" class="error mt-1">
+                        NameSkill es requerido.
+                      </p>
+                      <p *ngIf="NameSkill?.errors?.['minlength']" class="error mt-1">
+                        NameSkill debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="NameSkill?.errors?.['maxlength']" class="error mt-1">
+                        NameSkill debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+                  </div>
+
+
+                </div>
+
+
+
+              </div>
+
+              <div class="mb-1 inputs">
+                <label for="newUrlSvg" class="form-label"> Url Svg
+                </label>
+                <input type="text" class="form-control" id="newUrlSvg" placeholder="Url Svg"
+                  aria-describedby="newUrlSvg" formControlName="urlSvg"
+                  [ngStyle]="{'border-color':( UrlSvg?.errors &&  UrlSvg?.touched) ? 'tomato' : '#736b5e', 'color':( UrlSvg?.errors &&  UrlSvg?.touched) ? 'tomato' : 'whitesmoke' }">
+                <div *ngIf=" UrlSvg?.errors  &&  UrlSvg?.touched">
+                  <p *ngIf=" UrlSvg?.hasError('required')" class="error mt-1">
+                    newUrlSvg es requerido.
+                  </p>
+                  <p *ngIf=" UrlSvg?.errors?.['minlength']" class="error mt-1">
+                    newUrlSvg debe ser de 5 o más caracteres.
+                  </p>
+                  <p *ngIf=" UrlSvg?.errors?.['maxlength']" class="error mt-1">
+                    newUrlSvg debe ser menor a 12 caracteres.
+                  </p>
+                </div>
+              </div>
+
+
+
+
+              <div class="btnsEdit">
+                <button class="button">
+                  <div (click)="cancelar()">
+                    <p>Cancelar</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                      preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                      <path fill="currentColor"
+                        d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10s10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17L12 13.41L8.41 17L7 15.59L10.59 12L7 8.41L8.41 7L12 10.59L15.59 7L17 8.41L13.41 12L17 15.59z" />
+                    </svg>
+                  </div>
+                </button>
+                <button class="button" type="submit">
+                  <div>
+                    <p>Guardar</p>
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em"
+                      preserveAspectRatio="xMidYMid meet" viewBox="0 0 1200 1200">
+                      <path fill="currentColor"
+                        d="M600 0C268.629 0 0 268.629 0 600s268.629 600 600 600s600-268.629 600-600S931.371 0 600 0zm257.446 281.03l124.657 124.658l-389.354 389.43L468.823 918.97L344.165 794.312l-126.27-126.344l123.853-123.853l126.27 126.343L857.446 281.03z" />
+                    </svg>
+                  </div>
+                </button>
+              </div>
+
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+
+    <ng-template #new>
+      <div class="exp" id="newExperience">
+        <form [formGroup]="form" (ngSubmit)="onEnviar($event)">
+          <div class="list-group">
+            <div class="list-group-item list-group-item-action target">
+              <div class="alert alert-info" role="alert">
+                <div class="svgRutas">
+                  <p>svg rutas</p><a href="https://devicon.dev/" target="_blank">here</a>
+                </div>
+              </div>
+              <div class="d-flex w-100 justify-content-between header">
+
+                <div class="head">
+
+                  <div class="mb-1 inputs">
+                    <label for="newNameSkill" class="form-label">NameSkill
+                    </label>
+                    <input
+                      [ngStyle]="{'border-color':(NameSkill?.errors && NameSkill?.touched) ? 'tomato' : '#736b5e', 'color':(NameSkill?.errors && NameSkill?.touched) ? 'tomato' : 'whitesmoke' }"
+                      type="text" class="form-control" id="newNameSkill" placeholder="NameSkill"
+                      formControlName="nameSkill" aria-describedby="newNameSkill">
+                    <div *ngIf="NameSkill?.errors  && NameSkill?.touched">
+                      <p *ngIf="NameSkill?.hasError('required')" class="error mt-1">
+                        NameSkill es requerido.
+                      </p>
+                      <p *ngIf="NameSkill?.errors?.['minlength']" class="error mt-1">
+                        NameSkill debe ser de 5 o más caracteres.
+                      </p>
+                      <p *ngIf="NameSkill?.errors?.['maxlength']" class="error mt-1">
+                        NameSkill debe ser menor a 12 caracteres.
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </div>
+
+
+              <div class="mb-1 inputs">
+                <label for="newUrlSvg" class="form-label"> Url Svg
+                </label>
+                <input type="text" class="form-control" id="newUrlSvg" placeholder="Url Svg"
+                  aria-describedby="newUrlSvg" formControlName="urlSvg"
+                  [ngStyle]="{'border-color':( UrlSvg?.errors &&  UrlSvg?.touched) ? 'tomato' : '#736b5e', 'color':( UrlSvg?.errors &&  UrlSvg?.touched) ? 'tomato' : 'whitesmoke' }">
+                <div *ngIf=" UrlSvg?.errors  &&  UrlSvg?.touched">
+                  <p *ngIf=" UrlSvg?.hasError('required')" class="error mt-1">
+                    newUrlSvg es requerido.
+                  </p>
+                  <p *ngIf=" UrlSvg?.errors?.['minlength']" class="error mt-1">
+                    newUrlSvg debe ser de 5 o más caracteres.
+                  </p>
+                  <p *ngIf=" UrlSvg?.errors?.['maxlength']" class="error mt-1">
+                    newUrlSvg debe ser menor a 12 caracteres.
+                  </p>
+                </div>
+              </div>
+
+              <div class="btnsEdit">
+                <button class="button">
+                    <div (click)="cancelar()">
+                        <p>Cancelar</p>
+                        <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9' /%3e%3cpath d='M10 10l4 4m0 -4l-4 4' /%3e%3c/svg%3e" alt="">
+                    </div>
+                </button>
+                <button class="button" type="submit">
+                    <div>
+                        <p>Guardar</p>
+                        <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='black' fill='none' stroke-linecap='round' stroke-width='1.5' stroke-linejoin='round'%3e%3cpath stroke='none' d='M0 0h24v24H0z' fill='none'/%3e%3ccircle cx='12' cy='12' r='9' /%3e%3cpath d='M9 12l2 2l4 -4' /%3e%3c/svg%3e" alt="">
+                    </div>
+                </button>
+            </div>
+
+            </div>
+          </div>
+        </form>
+      </div>
+    </ng-template>
+
+
+  </div>
+</div>

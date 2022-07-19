@@ -1,0 +1,24 @@
+
+<div *ngIf="session" class="container">
+
+    
+
+    <app-about [session]="session" [isAdmin]="isAdmin"></app-about>
+
+    <app-education [session]="session" [isAdmin]="isAdmin"></app-education>
+
+    <app-certificacion [isAdmin]="isAdmin" [session]="session"></app-certificacion>
+
+    <app-experience [session]="session" [isAdmin]="isAdmin" ></app-experience>
+
+    <app-skills [isAdmin]="isAdmin" ></app-skills>
+   
+    <app-works [isAdmin]="isAdmin" [session]="session"></app-works>
+
+</div>
+
+<div *ngIf="!session">
+    <app-login></app-login>
+</div>
+
+

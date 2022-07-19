@@ -1,0 +1,8 @@
+<app-navbar ></app-navbar>
+<div *ngIf="session" class="container">
+  <app-banner-home></app-banner-home>
+</div>
+
+<router-outlet ></router-outlet>
+
+<app-footer *ngIf="session"></app-footer>

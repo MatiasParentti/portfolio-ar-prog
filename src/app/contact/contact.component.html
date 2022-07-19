@@ -1,0 +1,55 @@
+<div class="contact" id="contact">
+  <div class="about">
+    <div class="header">
+      <h3>Contacto</h3>
+    </div>
+    
+    <div class="entry"></div>
+    <div class="row">
+      <div class="col-1 col-md-2 col-lg-3"></div>
+      <div class="col-10 col-md-8 col-lg-6">
+        <form #myForm="ngForm" [formGroup]="form" (ngSubmit)="onEnviar($event);">
+
+         
+          <div class="mb-3 ">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com" formControlName="email"
+              [ngStyle]="{'border-color':(Email?.errors && Email?.touched) ? 'tomato' : '#736b5e', 'color':(Email?.errors && Email?.touched) ? 'tomato' : 'whitesmoke' }" />
+            <div class="error" *ngIf="Email?.errors  && Email?.touched">
+              <p *ngIf="Email?.hasError('required')" class="error mt-1">
+                Email es requerido.
+              </p>
+              <p *ngIf="Email?.errors?.['email']" class="error mt-1">
+                El formato debe ser Email
+              </p>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="consulta" class="form-label">Consulta</label>
+            <textarea class="form-control" id="consulta" rows="3" formControlName="consulta"
+              [ngStyle]="{'border-color':(Consulta?.errors && Consulta?.touched) ? 'tomato' : '#736b5e', 'color':(Consulta?.errors && Consulta?.touched) ? 'tomato' : 'whitesmoke' }"></textarea>
+            <div class="error" *ngIf="Consulta?.errors  && Consulta?.touched">
+              <p *ngIf="Consulta?.hasError('required')" class="error mt-1">
+                Consulta es requerido.
+              </p>
+              <p *ngIf="Consulta?.errors?.['maxlength']" class="error mt-1">
+                Consulta no puede superar los 1000 caracteres.
+              </p>
+            </div>
+          </div>
+
+
+
+          <button class="button mt-1" type="submit">
+            <p>Enviar</p>
+          </button>
+
+
+
+        </form>
+      </div>
+      <div class="col-1 col-md-2 col-lg-3"></div>
+    </div>
+  </div>
+</div>
