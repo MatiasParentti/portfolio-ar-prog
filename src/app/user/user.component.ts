@@ -79,7 +79,7 @@ export class UserComponent implements OnInit {
       name: ['', [Validators.required, Validators.maxLength(20)]],
       lastname: ['', [Validators.required, Validators.maxLength(20000)]],
       about: ['', [Validators.required, Validators.maxLength(2000)]],
-      imageUrl: ['', [Validators.required, Validators.maxLength(1000)]],
+      imageUrl: ['', [Validators.required, Validators.maxLength(20000)]],
       email: ['', [Validators.required, Validators.maxLength(200)]],
       github: ['', [Validators.required, Validators.maxLength(1000)]],
       linkedin: ['', [Validators.required, Validators.maxLength(1000)]],
